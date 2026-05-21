@@ -1,0 +1,141 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Condado Club Design System */
+  --font-size: 16px;
+
+  /* Colors */
+  --gold: #E8A94A;
+  --gold-light: #F5C878;
+  --gold-dim: rgba(232,169,74,0.12);
+  --gold-border: rgba(232,169,74,0.35);
+  --night: #080509;
+  --night-2: #0F0B14;
+  --night-3: #160F1C;
+  --white: #FFFFFF;
+  --w60: rgba(255,255,255,0.6);
+  --w40: rgba(255,255,255,0.4);
+  --w15: rgba(255,255,255,0.15);
+  --w08: rgba(255,255,255,0.08);
+  --w05: rgba(255,255,255,0.05);
+
+  /* Typography */
+  --serif: 'Oxanium', sans-serif;
+  --sans: 'Oxanium', sans-serif;
+
+  /* Standard theme tokens */
+  --background: var(--night);
+  --foreground: var(--white);
+  --card: var(--night-2);
+  --card-foreground: var(--white);
+  --popover: var(--night-3);
+  --popover-foreground: var(--white);
+  --primary: var(--gold);
+  --primary-foreground: var(--night);
+  --secondary: var(--night-2);
+  --secondary-foreground: var(--white);
+  --muted: var(--night-3);
+  --muted-foreground: var(--w40);
+  --accent: var(--gold-dim);
+  --accent-foreground: var(--gold);
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: var(--w08);
+  --input: transparent;
+  --input-background: var(--w05);
+  --switch-background: var(--w15);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: var(--gold-border);
+  --radius: 0.625rem;
+}
+
+
+@theme inline {
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dim: var(--gold-dim);
+  --color-gold-border: var(--gold-border);
+  --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-night-3: var(--night-3);
+  --color-white: var(--white);
+  --color-w60: var(--w60);
+  --color-w40: var(--w40);
+  --color-w15: var(--w15);
+  --color-w08: var(--w08);
+  --color-w05: var(--w05);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: var(--font-size);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--night);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--gold-border);
+    border-radius: 2px;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button {
+    font-family: var(--sans);
+    cursor: pointer;
+    border: none;
+  }
+}
