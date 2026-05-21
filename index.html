@@ -1297,7 +1297,7 @@ function Home({ onNav }) {
 
       {/* DENIA BREAK */}
       <div style={{ position: 'relative', padding: 'calc(120px * var(--pad-scale)) 24px', overflow: 'hidden', textAlign: 'center' }}>
-        <img src="assets/sala/sala-condado-01.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src="assets/sala/sala-condado-02.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, rgba(8,5,9,0.65) 0%, rgba(8,5,9,0.45) 40%, rgba(8,5,9,0.75) 100%)',
@@ -1415,7 +1415,7 @@ function Home({ onNav }) {
       {/* VIP teaser */}
       <section style={{ display: 'grid', gridTemplateColumns: '1fr', background: 'var(--night-3)' }} className="vip-teaser">
         <div style={{ position: 'relative', minHeight: 300, overflow: 'hidden' }}>
-          <img src="assets/events/prive.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src="assets/sala/zona-vip-escenario.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,5,9,0.3) 0%, rgba(8,5,9,0.7) 100%)' }}></div>
           <div style={{
             position: 'absolute', top: 24, left: 24,
@@ -1652,7 +1652,7 @@ const VIP_TABLES = [
     price: '150',
     pax: '6 personas',
     location: 'Junto al DJ en el escenario',
-    img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&q=80',
+    img: 'assets/sala/zona-vip-escenario.jpg',
     features: ['Acceso VIP para 6 personas', '1 botella incluida', '12 refrescos incluidos', 'Mesa reservada', 'Zona privada junto al DJ', 'Acceso prioritario sin cola'],
     tag: 'La experiencia top',
   },
@@ -2138,36 +2138,18 @@ function EventosPrivados({ onNav }) {
   return (
     <div className="page-enter">
       <PageHeader
-        eyebrow="Privatizaciones · Empresas · Celebraciones"
+        eyebrow="Eventos Corporativos · Eventos Privados"
         title='Eventos<br/><em style="font-style:normal;font-weight:300;color:var(--gold)">privados</em>'
-        subtitle="Cumpleaños, despedidas, eventos corporativos o privatizaciones completas. La sala más imponente de la Costa Blanca, a tu disposición."
+        subtitle="La sala más imponente de la Costa Blanca, a tu disposición."
       />
 
       <div style={{ padding: '0 24px 80px' }}>
         <div className="container-wide" style={{ margin: '0 auto' }}>
 
-          {/* Type selector */}
-          <div className="ep-types">
-            {[
-              { k: 'cumple', l: 'Cumpleaños', desc: '20–200 personas', icon: '✦' },
-              { k: 'despedida', l: 'Despedidas', desc: 'Solteros y solteras', icon: '◈' },
-              { k: 'empresa', l: 'Eventos corporativos', desc: 'Empresas y marcas', icon: '◉' },
-              { k: 'priv', l: 'Privatización total', desc: 'Sala completa · 1.500 pax', icon: '◆' },
-            ].map((t) => (
-              <button key={t.k} onClick={() => setType(t.k)} className={`ep-type${type === t.k ? ' active' : ''}`}>
-                <span className="ep-type-icon">{t.icon}</span>
-                <span>
-                  <p className="serif" style={{ fontSize: 19, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.3, marginBottom: 2 }}>{t.l}</p>
-                  <p style={{ fontSize: 11, letterSpacing: 1.5, textTransform: 'uppercase', color: 'var(--w40)' }}>{t.desc}</p>
-                </span>
-              </button>
-            ))}
-          </div>
-
           {/* Two-column: image + features */}
           <div className="ep-split">
             <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', minHeight: 380, background: 'var(--night-3)' }}>
-              <img src={GALLERY[2]} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src='assets/sala/sala-condado-02.jpg' alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(8,5,9,0.4), rgba(8,5,9,0.7))' }}></div>
               <div style={{ position: 'absolute', bottom: 28, left: 28, right: 28 }}>
                 <span style={{
