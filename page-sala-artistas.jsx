@@ -162,15 +162,6 @@ function Sala({ onNav }) {
 }
 
 function Artistas({ onNav }) {
-  const [filter, setFilter] = useState('all');
-  const [search, setSearch] = useState('');
-
-  const filtered = ARTISTS.filter((a) => {
-    const matchSearch = a.name.toLowerCase().includes(search.toLowerCase());
-    if (filter === 'all') return matchSearch;
-    return matchSearch && a.genre.toLowerCase().includes(filter.toLowerCase());
-  });
-
   return (
     <div className="page-enter">
       <PageHeader
@@ -191,52 +182,8 @@ function Artistas({ onNav }) {
 
       <div style={{ padding: '0 24px 100px' }}>
         <div className="container-wide" style={{ margin: '0 auto' }}>
-          {/* Filters */}
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', gap: 16,
-            justifyContent: 'space-between', alignItems: 'center',
-            paddingBottom: 24, borderBottom: '1px solid var(--w08)',
-            marginBottom: 32,
-          }}>
-            <div style={{ display: 'flex', gap: 8, overflowX: 'auto' }} className="no-scrollbar">
-              {[
-                { k: 'all', l: 'Todos' },
-                { k: 'reggaeton', l: 'Reggaeton' },
-                { k: 'urban', l: 'Urban' },
-                { k: 'trap', l: 'Trap' },
-                { k: 'house', l: 'House' },
-                { k: 'electronic', l: 'Electronic' },
-              ].map((m) => (
-                <button key={m.k} onClick={() => setFilter(m.k)} className={`chip${filter === m.k ? ' active' : ''}`}>
-                  {m.l}
-                </button>
-              ))}
-            </div>
-            <div style={{ position: 'relative', minWidth: 220 }}>
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar artista..."
-                style={{
-                  width: '100%',
-                  background: 'var(--w05)', border: '1px solid var(--w15)',
-                  color: 'var(--white)', fontFamily: 'var(--sans)',
-                  fontSize: 13, padding: '10px 14px 10px 36px',
-                  borderRadius: 999, outline: 'none',
-                }}
-              />
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--w40)' }}>
-                <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              </svg>
-            </div>
-          </div>
-
-          <p className="micro" style={{ marginBottom: 24 }}>
-            <strong style={{ color: 'var(--gold)' }}>{filtered.length}</strong> &nbsp;artistas
-          </p>
-
           <div className="artists-grid">
-            {filtered.map((a, i) => (
+            {ARTISTS.map((a, i) => (
               <div key={i} className="artist-card">
                 <img src={a.img} alt={a.name} loading="lazy" />
                 <div className="artist-grad"></div>
@@ -249,12 +196,6 @@ function Artistas({ onNav }) {
               </div>
             ))}
           </div>
-
-          {filtered.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--w40)' }}>
-              <p>Sin resultados.</p>
-            </div>
-          )}
         </div>
       </div>
 

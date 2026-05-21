@@ -28,7 +28,7 @@ function Home({ onNav }) {
           }}>
             Donde el sol<br/>cae y <em style={{ color: 'var(--gold)' }}>empieza</em><br/>la noche.
           </h1>
-          <p style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: 'var(--w40)', marginBottom: 32 }}>
+          <p style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: 'var(--white)', marginBottom: 32 }}>
             Condado Club · Denia · Costa Blanca
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -291,10 +291,10 @@ function Home({ onNav }) {
       </section>
 
       {/* VIP teaser */}
-      <section style={{ display: 'grid', gridTemplateColumns: '1fr', background: 'var(--night-3)' }} className="vip-teaser">
-        <div style={{ position: 'relative', minHeight: 300, overflow: 'hidden' }}>
-          <img src="assets/events/prive.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,5,9,0.3) 0%, rgba(8,5,9,0.7) 100%)' }}></div>
+      <section className="vip-teaser">
+        <div style={{ position: 'relative', overflow: 'hidden' }}>
+          <img src="assets/sala/zona-vip-escenario.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,5,9,0.15) 0%, rgba(8,5,9,0.55) 100%)' }}></div>
           <div style={{
             position: 'absolute', top: 24, left: 24,
             background: 'var(--gold-dim)', border: '1px solid var(--gold-border)',
@@ -302,7 +302,7 @@ function Home({ onNav }) {
             fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)',
           }}>Experiencia VIP</div>
         </div>
-        <div style={{ padding: '56px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ padding: '56px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--night-3)' }}>
           <span className="eyebrow">Reservas privadas</span>
           <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 24 }}>
             Tu zona.<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>Tus reglas.</em>
@@ -313,6 +313,7 @@ function Home({ onNav }) {
               'Botella de bienvenida incluida',
               'Atención personal toda la noche',
               'Posición privilegiada frente al escenario',
+              'Acceso a zonas exclusivas de la sala',
             ].map((f, i) => (
               <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--w05)', fontSize: 14, color: 'var(--w60)' }}>
                 <span style={{ width: 22, height: 22, flexShrink: 0, background: 'var(--gold-dim)', border: '1px solid var(--gold-border)', borderRadius: 6, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: 'var(--gold)' }}>✓</span>
@@ -321,14 +322,20 @@ function Home({ onNav }) {
             ))}
           </ul>
           <a href="#/mesas-vip" onClick={(e) => { e.preventDefault(); onNav('/mesas-vip'); }} className="btn btn-gold" style={{ alignSelf: 'flex-start' }}>
-            Ver mesas VIP →
+            Ver todas las zonas VIP →
           </a>
         </div>
         <style>{`
+          .vip-teaser {
+            display: grid;
+            grid-template-columns: 1fr;
+            background: var(--night-3);
+          }
+          .vip-teaser > div:first-child { min-height: 340px; }
           @media (min-width: 768px) {
             .vip-teaser { grid-template-columns: 1fr 1fr; }
+            .vip-teaser > div:first-child { min-height: 560px; }
             .vip-teaser > div:last-child { padding: 80px 64px; }
-            .vip-teaser > div:first-child { min-height: 540px; }
           }
         `}</style>
       </section>

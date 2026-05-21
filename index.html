@@ -1250,7 +1250,7 @@ function Home({ onNav }) {
           }}>
             Donde el sol<br/>cae y <em style={{ color: 'var(--gold)' }}>empieza</em><br/>la noche.
           </h1>
-          <p style={{ fontSize: 14, letterSpacing: 4, textTransform: 'uppercase', color: 'var(--w40)', marginBottom: 32 }}>
+          <p style={{ fontSize: 14, letterSpacing: 4, textTransform: 'uppercase', color: 'var(--white)', marginBottom: 32 }}>
             Condado Club · Denia, Alicante
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -1513,10 +1513,10 @@ function Home({ onNav }) {
       </section>
 
       {/* VIP teaser */}
-      <section style={{ display: 'grid', gridTemplateColumns: '1fr', background: 'var(--night-3)' }} className="vip-teaser">
-        <div style={{ position: 'relative', minHeight: 300, overflow: 'hidden' }}>
+      <section className="vip-teaser">
+        <div style={{ position: 'relative', overflow: 'hidden' }}>
           <img src="assets/sala/zona-vip-escenario.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,5,9,0.3) 0%, rgba(8,5,9,0.7) 100%)' }}></div>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,5,9,0.15) 0%, rgba(8,5,9,0.55) 100%)' }}></div>
           <div style={{
             position: 'absolute', top: 24, left: 24,
             background: 'var(--gold-dim)', border: '1px solid var(--gold-border)',
@@ -1524,7 +1524,7 @@ function Home({ onNav }) {
             fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)',
           }}>Experiencia VIP</div>
         </div>
-        <div style={{ padding: '56px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ padding: '56px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--night-3)' }}>
           <span className="eyebrow">Reservas privadas</span>
           <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 24 }}>
             Tu zona.<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>Tus reglas.</em>
@@ -1535,6 +1535,7 @@ function Home({ onNav }) {
               'Botella de bienvenida incluida',
               'Atención personal toda la noche',
               'Posición privilegiada frente al escenario',
+              'Acceso a zonas exclusivas de la sala',
             ].map((f, i) => (
               <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--w05)', fontSize: 14, color: 'var(--w60)' }}>
                 <span style={{ width: 22, height: 22, flexShrink: 0, background: 'var(--gold-dim)', border: '1px solid var(--gold-border)', borderRadius: 6, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: 'var(--gold)' }}>✓</span>
@@ -1543,14 +1544,20 @@ function Home({ onNav }) {
             ))}
           </ul>
           <a href="#/mesas-vip" onClick={(e) => { e.preventDefault(); onNav('/mesas-vip'); }} className="btn btn-gold" style={{ alignSelf: 'flex-start' }}>
-            Ver mesas VIP →
+            Ver todas las zonas VIP →
           </a>
         </div>
         <style>{`
+          .vip-teaser {
+            display: grid;
+            grid-template-columns: 1fr;
+            background: var(--night-3);
+          }
+          .vip-teaser > div:first-child { min-height: 340px; }
           @media (min-width: 768px) {
             .vip-teaser { grid-template-columns: 1fr 1fr; }
+            .vip-teaser > div:first-child { min-height: 560px; }
             .vip-teaser > div:last-child { padding: 80px 64px; }
-            .vip-teaser > div:first-child { min-height: 540px; }
           }
         `}</style>
       </section>
@@ -2101,15 +2108,6 @@ function Sala({ onNav }) {
 }
 
 function Artistas({ onNav }) {
-  const [filter, setFilter] = useState('all');
-  const [search, setSearch] = useState('');
-
-  const filtered = ARTISTS.filter((a) => {
-    const matchSearch = a.name.toLowerCase().includes(search.toLowerCase());
-    if (filter === 'all') return matchSearch;
-    return matchSearch && a.genre.toLowerCase().includes(filter.toLowerCase());
-  });
-
   return (
     <div className="page-enter">
       <PageHeader
@@ -2130,52 +2128,8 @@ function Artistas({ onNav }) {
 
       <div style={{ padding: '0 24px 100px' }}>
         <div className="container-wide" style={{ margin: '0 auto' }}>
-          {/* Filters */}
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', gap: 16,
-            justifyContent: 'space-between', alignItems: 'center',
-            paddingBottom: 24, borderBottom: '1px solid var(--w08)',
-            marginBottom: 32,
-          }}>
-            <div style={{ display: 'flex', gap: 8, overflowX: 'auto' }} className="no-scrollbar">
-              {[
-                { k: 'all', l: 'Todos' },
-                { k: 'reggaeton', l: 'Reggaeton' },
-                { k: 'urban', l: 'Urban' },
-                { k: 'trap', l: 'Trap' },
-                { k: 'house', l: 'House' },
-                { k: 'electronic', l: 'Electronic' },
-              ].map((m) => (
-                <button key={m.k} onClick={() => setFilter(m.k)} className={`chip${filter === m.k ? ' active' : ''}`}>
-                  {m.l}
-                </button>
-              ))}
-            </div>
-            <div style={{ position: 'relative', minWidth: 220 }}>
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar artista..."
-                style={{
-                  width: '100%',
-                  background: 'var(--w05)', border: '1px solid var(--w15)',
-                  color: 'var(--white)', fontFamily: 'var(--sans)',
-                  fontSize: 13, padding: '10px 14px 10px 36px',
-                  borderRadius: 999, outline: 'none',
-                }}
-              />
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--w40)' }}>
-                <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              </svg>
-            </div>
-          </div>
-
-          <p className="micro" style={{ marginBottom: 24 }}>
-            <strong style={{ color: 'var(--gold)' }}>{filtered.length}</strong> &nbsp;artistas
-          </p>
-
           <div className="artists-grid">
-            {filtered.map((a, i) => (
+            {ARTISTS.map((a, i) => (
               <div key={i} className="artist-card">
                 <img src={a.img} alt={a.name} loading="lazy" />
                 <div className="artist-grad"></div>
@@ -2188,12 +2142,6 @@ function Artistas({ onNav }) {
               </div>
             ))}
           </div>
-
-          {filtered.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--w40)' }}>
-              <p>Sin resultados.</p>
-            </div>
-          )}
         </div>
       </div>
 
