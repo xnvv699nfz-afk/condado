@@ -38,6 +38,45 @@ function Home({ onNav }) {
         </div>
       </section>
 
+      {/* ARTIST TICKER */}
+      <div style={{ background: 'var(--night-2)', borderTop: '1px solid var(--w08)', borderBottom: '1px solid var(--w08)', overflow: 'hidden', padding: '14px 0' }}>
+        <div className="artist-ticker">
+          {[...ARTISTS, ...ARTISTS].map((a, i) => (
+            <span key={i} className="ticker-item">
+              <span className={i % 3 === 1 ? 'ticker-name ticker-gold' : 'ticker-name'}>{a.name.toUpperCase()}</span>
+              <span className="ticker-dot">·</span>
+            </span>
+          ))}
+        </div>
+        <style>{`
+          .artist-ticker {
+            display: flex;
+            width: max-content;
+            animation: ticker-scroll 28s linear infinite;
+          }
+          .artist-ticker:hover { animation-play-state: paused; }
+          @keyframes ticker-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            padding: 0 18px;
+            white-space: nowrap;
+          }
+          .ticker-name {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--w40);
+          }
+          .ticker-gold { color: var(--gold); font-weight: 700; }
+          .ticker-dot { color: var(--gold-border); font-size: 8px; }
+        `}</style>
+      </div>
+
       {/* PRÓXIMOS EVENTOS — teaser */}
       <section className="container">
         <div className="container-wide" style={{ margin: '0 auto' }}>
