@@ -6,7 +6,7 @@
 <title>Condado Club · Dénia · Prototipo Responsive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Barlow:wght@300;400;500;700&display=swap" rel="stylesheet" />
 <style>
 @font-face {
   font-family: 'Oxanium';
@@ -31,11 +31,11 @@
   --w15: rgba(255,255,255,0.15);
   --w08: rgba(255,255,255,0.08);
   --w05: rgba(255,255,255,0.05);
-  --serif: 'Oxanium', 'Arial Narrow', sans-serif;
+  --serif: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --serif-weight: 800;
   --serif-tracking: -0.5px;
   --serif-italic-weight: 300;
-  --sans: 'Oxanium', system-ui, sans-serif;
+  --sans: 'Barlow', system-ui, sans-serif;
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -370,7 +370,7 @@ button { font-family: var(--sans); cursor: pointer; border: none; background: no
 
 </style>
 </head>
-<body style="font-family: Oxanium">
+<body style="font-family: Barlow">
 <div id="root"></div>
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -1250,8 +1250,8 @@ function Home({ onNav }) {
           }}>
             Donde el sol<br/>cae y <em style={{ color: 'var(--gold)' }}>empieza</em><br/>la noche.
           </h1>
-          <p style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: 'var(--w40)', marginBottom: 32 }}>
-            Condado Club · Denia · Costa Blanca
+          <p style={{ fontSize: 14, letterSpacing: 4, textTransform: 'uppercase', color: 'var(--w40)', marginBottom: 32 }}>
+            Condado Club · Denia, Alicante
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <a href="#/calendario" onClick={(e) => { e.preventDefault(); onNav('/calendario'); }} className="btn btn-gold">Ver próximos eventos →</a>
@@ -1329,7 +1329,7 @@ function Home({ onNav }) {
         <div className="container-wide" style={{ margin: '0 auto' }}>
           <div className="section-head">
             <div>
-              <span className="eyebrow">The House of Artists · +200 nombres en 15 años</span>
+              <span className="eyebrow">The Show of Artists · +200 nombres en 15 años</span>
               <h2 style={{ marginTop: 10 }}><em>Artistas</em> que han<br/>pasado por Condado.</h2>
             </div>
           </div>
@@ -1385,15 +1385,36 @@ function Home({ onNav }) {
       <section className="container" style={{ background: 'var(--night-2)' }}>
         <div className="container-wide" style={{ margin: '0 auto', textAlign: 'center' }}>
           <span className="eyebrow">Lo que nos hace distintos</span>
-          <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 52 }}>
+          <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 40 }}>
             No es una discoteca.<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>Es un show.</em>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, textAlign: 'left' }}>
+
+          <div className="home-gallery" style={{ marginBottom: 40 }}>
+            <div className="hg-item hg-a">
+              <img src="assets/sala/sala-condado-04.jpg" alt="Interstellar" loading="lazy" />
+            </div>
+            <div className="hg-item hg-b">
+              <img src="assets/sala/zona-vip-escenario.jpg" alt="Zona VIP" loading="lazy" />
+            </div>
+            <div className="hg-item hg-c">
+              <img src="assets/sala/sala-condado-06.jpg" alt="Fever" loading="lazy" />
+            </div>
+            <div className="hg-item hg-d">
+              <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} src="uploads/video-hero-condado.mp4" />
+            </div>
+            <div className="hg-item hg-e">
+              <img src="assets/sala/sala-condado-03.jpg" alt="Privé" loading="lazy" />
+            </div>
+            <div className="hg-item hg-f">
+              <img src="assets/sala/sala-condado-05.jpg" alt="Sala Condado" loading="lazy" />
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, textAlign: 'left' }}>
             {[
               { icon: '✦', title: 'Producción artística', desc: 'Shows en vivo, performers y escenografías diseñadas para impactar.' },
               { icon: '◈', title: 'Efectos especiales', desc: 'Llamas, CO₂, confeti y pirotecnia. Tecnología de primer nivel.' },
               { icon: '◉', title: 'Sonido L-Acoustics', desc: 'Sistema calibrado para que cada frecuencia se sienta en el cuerpo.' },
-              { icon: '◆', title: 'Exclusividad real', desc: 'Acceso controlado, zonas premium y atención dedicada.' },
             ].map((item, i) => (
               <div key={i} style={{
                 background: 'var(--night-3)', border: '1px solid var(--w08)',
@@ -1410,6 +1431,46 @@ function Home({ onNav }) {
             <a href="#/sala" onClick={(e) => { e.preventDefault(); onNav('/sala'); }} className="btn btn-ghost">Conocer la sala →</a>
           </div>
         </div>
+        <style>{`
+          .home-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 300px 240px 260px;
+            gap: 10px;
+          }
+          @media (min-width: 600px) { .home-gallery { gap: 12px; } }
+          @media (min-width: 1200px) { .home-gallery { gap: 14px; grid-template-rows: 340px 260px 300px; } }
+          .hg-item {
+            overflow: hidden;
+            background: var(--night-3);
+            position: relative;
+            border-radius: var(--radius-md);
+          }
+          .hg-item img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 600ms ease;
+          }
+          .hg-item:hover img { transform: scale(1.04); }
+          .hg-a { grid-column: 1; grid-row: 1 / 3; }
+          .hg-b { grid-column: 2; grid-row: 1; }
+          .hg-c { grid-column: 3; grid-row: 1; }
+          .hg-d { grid-column: 2; grid-row: 2 / 4; }
+          .hg-e { grid-column: 3; grid-row: 2 / 4; }
+          .hg-f { grid-column: 1; grid-row: 3; }
+          @media (max-width: 700px) {
+            .home-gallery {
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: 200px 200px 200px;
+            }
+            .hg-a { grid-column: 1; grid-row: 1 / 3; }
+            .hg-b { grid-column: 2; grid-row: 1; }
+            .hg-c { grid-column: 2; grid-row: 2; }
+            .hg-d { grid-column: 1 / 3; grid-row: 3; }
+            .hg-e { display: none; }
+            .hg-f { display: none; }
+          }
+        `}</style>
       </section>
 
       {/* VIP teaser */}
@@ -1524,8 +1585,7 @@ function Calendario({ onNav }) {
     <div className="page-enter">
       <PageHeader
         eyebrow="Agenda completa · 2026"
-        title='Calendario<br/><em style="font-style:normal;font-weight:300;color:var(--gold)">de eventos</em>'
-        subtitle="Toda la temporada en Condado Club. Filtra por mes, descubre los próximos shows y reserva tu entrada antes de que se agoten."
+        title='Calendario<em style="font-style:normal;font-weight:300;color:var(--gold)"></em>'
       />
 
       <div style={{ padding: '0 24px 100px' }}>
@@ -1563,10 +1623,6 @@ function Calendario({ onNav }) {
               </button>
             </div>
           </div>
-
-          <p className="micro" style={{ marginBottom: 28 }}>
-            <strong style={{ color: 'var(--gold)' }}>{filtered.length}</strong> &nbsp;eventos · Filtro: {month === 'all' ? 'Todos los meses' : month.toUpperCase()}
-          </p>
 
           {view === 'grid' ? (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
@@ -2334,10 +2390,10 @@ function Contacto({ onNav }) {
                     <animate attributeName="r" from="6" to="26" dur="2s" repeatCount="indefinite"/>
                     <animate attributeName="opacity" from="0.7" to="0" dur="2s" repeatCount="indefinite"/>
                   </circle>
-                  <text x="220" y="138" fill="white" fontSize="9" fontFamily="'Oxanium', sans-serif" fontWeight="700" letterSpacing="2">CONDADO CLUB</text>
-                  <text x="220" y="150" fill="rgba(255,255,255,0.5)" fontSize="7" fontFamily="Oxanium" letterSpacing="1">DÉNIA</text>
-                  <text x="20" y="195" fill="rgba(232,169,74,0.5)" fontSize="7" fontFamily="Oxanium" letterSpacing="1.5">MEDITERRÁNEO</text>
-                  <text x="290" y="55" fill="rgba(255,255,255,0.25)" fontSize="7" fontFamily="Oxanium" letterSpacing="1.5">MONTGÓ</text>
+                  <text x="220" y="138" fill="white" fontSize="9" fontFamily="'Barlow', sans-serif" fontWeight="700" letterSpacing="2">CONDADO CLUB</text>
+                  <text x="220" y="150" fill="rgba(255,255,255,0.5)" fontSize="7" fontFamily="Barlow" letterSpacing="1">DÉNIA</text>
+                  <text x="20" y="195" fill="rgba(232,169,74,0.5)" fontSize="7" fontFamily="Barlow" letterSpacing="1.5">MEDITERRÁNEO</text>
+                  <text x="290" y="55" fill="rgba(255,255,255,0.25)" fontSize="7" fontFamily="Barlow" letterSpacing="1.5">MONTGÓ</text>
                 </svg>
                 <a href="https://maps.google.com/?q=Denia+Alicante" target="_blank" rel="noreferrer" className="btn btn-gold btn-sm" style={{ position: 'absolute', bottom: 16, right: 16 }}>
                   Abrir en Maps →
@@ -2449,11 +2505,11 @@ const VIBES = {
 
 // Display type — different typographic personalities
 const DISPLAYS = {
-  condensed: { name: 'Condensed', family: "'Oxanium', sans-serif", weight: 800, tracking: '-0.5px', italicWeight: 300, googleFonts: null },
+  condensed: { name: 'Condensed', family: "'Barlow Condensed', sans-serif", weight: 800, tracking: '-0.5px', italicWeight: 300, googleFonts: 'Barlow+Condensed:wght@300;400;600;700;800' },
   editorial: { name: 'Editorial', family: "'Playfair Display', 'Times New Roman', serif", weight: 900, tracking: '-1.5px', italicWeight: 400, googleFonts: 'Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700' },
   hyper:     { name: 'Hyper',     family: "'Anton', 'Arial Black', sans-serif", weight: 400, tracking: '0.5px', italicWeight: 400, googleFonts: 'Anton' },
   mono:      { name: 'Mono',      family: "'Space Grotesk', system-ui, sans-serif", weight: 700, tracking: '-1px', italicWeight: 400, googleFonts: 'Space+Grotesk:wght@400;500;700' },
-  oxanium:   { name: 'Oxanium',   family: "'Oxanium', sans-serif", weight: 700, tracking: '-0.5px', italicWeight: 400, googleFonts: null },
+  oxanium:   { name: 'Oxanium',   family: "'Barlow', sans-serif", weight: 700, tracking: '-0.5px', italicWeight: 400, googleFonts: 'Barlow:wght@300;400;500;700' },
 };
 
 // Intensity — spacing, type scale, gradient drama

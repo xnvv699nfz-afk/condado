@@ -21,11 +21,11 @@
   --w15: rgba(255,255,255,0.15);
   --w08: rgba(255,255,255,0.08);
   --w05: rgba(255,255,255,0.05);
-  --serif: 'Oxanium', sans-serif;
+  --serif: 'Barlow Condensed', sans-serif;
   --serif-weight: 800;
   --serif-tracking: -0.5px;
   --serif-italic-weight: 300;
-  --sans: 'Oxanium', system-ui, sans-serif;
+  --sans: 'Barlow', system-ui, sans-serif;
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -65,9 +65,9 @@ button { font-family: var(--sans); cursor: pointer; border: none; background: no
   letter-spacing: var(--serif-tracking);
 }
 .serif em { font-weight: var(--serif-italic-weight); font-style: normal; }
-.// Force Oxanium for top-level headings
+.// Force Barlow for top-level headings
 h1, h2 {
-  font-family: 'Oxanium', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-weight: var(--serif-weight);
   letter-spacing: var(--serif-tracking);
 }

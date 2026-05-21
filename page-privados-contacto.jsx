@@ -220,10 +220,10 @@ function Contacto({ onNav }) {
                     <animate attributeName="r" from="6" to="26" dur="2s" repeatCount="indefinite"/>
                     <animate attributeName="opacity" from="0.7" to="0" dur="2s" repeatCount="indefinite"/>
                   </circle>
-                  <text x="220" y="138" fill="white" fontSize="9" fontFamily="'Oxanium', sans-serif" fontWeight="700" letterSpacing="2">CONDADO CLUB</text>
-                  <text x="220" y="150" fill="rgba(255,255,255,0.5)" fontSize="7" fontFamily="Oxanium" letterSpacing="1">DÉNIA</text>
-                  <text x="20" y="195" fill="rgba(232,169,74,0.5)" fontSize="7" fontFamily="Oxanium" letterSpacing="1.5">MEDITERRÁNEO</text>
-                  <text x="290" y="55" fill="rgba(255,255,255,0.25)" fontSize="7" fontFamily="Oxanium" letterSpacing="1.5">MONTGÓ</text>
+                  <text x="220" y="138" fill="white" fontSize="9" fontFamily="'Barlow', sans-serif" fontWeight="700" letterSpacing="2">CONDADO CLUB</text>
+                  <text x="220" y="150" fill="rgba(255,255,255,0.5)" fontSize="7" fontFamily="Barlow" letterSpacing="1">DÉNIA</text>
+                  <text x="20" y="195" fill="rgba(232,169,74,0.5)" fontSize="7" fontFamily="Barlow" letterSpacing="1.5">MEDITERRÁNEO</text>
+                  <text x="290" y="55" fill="rgba(255,255,255,0.25)" fontSize="7" fontFamily="Barlow" letterSpacing="1.5">MONTGÓ</text>
                 </svg>
                 <a href="https://maps.google.com/?q=Denia+Alicante" target="_blank" rel="noreferrer" className="btn btn-gold btn-sm" style={{ position: 'absolute', bottom: 16, right: 16 }}>
                   Abrir en Maps →

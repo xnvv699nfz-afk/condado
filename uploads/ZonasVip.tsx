@@ -55,8 +55,8 @@ export default function ZonasVip() {
           <svg height="38" viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Condado Club">
             <circle cx="28" cy="28" r="24" stroke="white" strokeWidth="2.5" fill="none"/>
             <path d="M28 5.5 A22.5 22.5 0 0 0 28 50.5 L28 5.5 Z" fill="white"/>
-            <text x="64" y="26" fontFamily="'Oxanium', sans-serif" fontWeight="800" fontSize="23" fill="white" letterSpacing="1" textAnchor="start">CONDADO</text>
-            <text x="64" y="48" fontFamily="'Oxanium', sans-serif" fontWeight="800" fontSize="23" fill="white" letterSpacing="1" textAnchor="start">CLUB</text>
+            <text x="64" y="26" fontFamily="'Barlow Condensed', sans-serif" fontWeight="800" fontSize="23" fill="white" letterSpacing="1" textAnchor="start">CONDADO</text>
+            <text x="64" y="48" fontFamily="'Barlow Condensed', sans-serif" fontWeight="800" fontSize="23" fill="white" letterSpacing="1" textAnchor="start">CLUB</text>
           </svg>
         </Link>
         <ul className="hidden md:flex gap-8 list-none">
@@ -313,8 +313,8 @@ export default function ZonasVip() {
               <svg height="28" viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Condado Club">
                 <circle cx="28" cy="28" r="24" stroke="white" strokeWidth="2.5" fill="none"/>
                 <path d="M28 5.5 A22.5 22.5 0 0 0 28 50.5 L28 5.5 Z" fill="white"/>
-                <text x="64" y="26" fontFamily="'Oxanium','Arial Black',sans-serif" fontWeight="800" fontSize="23" fill="white" letterSpacing="1" textAnchor="start">CONDADO</text>
-                <text x="64" y="48" fontFamily="'Oxanium','Arial Black',sans-serif" fontWeight="800" fontSize="23" fill="white" letterSpacing="1" textAnchor="start">CLUB</text>
+                <text x="64" y="26" fontFamily="'Barlow Condensed','Arial Black',sans-serif" fontWeight="800" fontSize="23" fill="white" letterSpacing="1" textAnchor="start">CONDADO</text>
+                <text x="64" y="48" fontFamily="'Barlow Condensed','Arial Black',sans-serif" fontWeight="800" fontSize="23" fill="white" letterSpacing="1" textAnchor="start">CLUB</text>
               </svg>
             </Link>
             <div className="space-y-3">

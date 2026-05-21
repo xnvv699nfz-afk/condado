@@ -20,8 +20,8 @@
   --w05: rgba(255,255,255,0.05);
 
   /* Typography */
-  --serif: 'Oxanium', sans-serif;
-  --sans: 'Oxanium', sans-serif;
+  --serif: 'Barlow Condensed', sans-serif;
+  --sans: 'Barlow', sans-serif;
 
   /* Standard theme tokens */
   --background: var(--night);

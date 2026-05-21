@@ -163,24 +163,36 @@ function Home({ onNav }) {
       <section className="container" style={{ background: 'var(--night-2)' }}>
         <div className="container-wide" style={{ margin: '0 auto', textAlign: 'center' }}>
           <span className="eyebrow">Lo que nos hace distintos</span>
-          <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 52 }}>
+          <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 40 }}>
             No es una discoteca.<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>Es un show.</em>
           </h2>
 
-          <div className="show-mosaic">
-            {GALLERY.map((img, i) => (
-              <div key={i} className={`mos mos-${i}`}>
-                <img src={img} alt="" loading="lazy" />
-              </div>
-            ))}
+          <div className="home-gallery" style={{ marginBottom: 40 }}>
+            <div className="hg-item hg-a">
+              <img src="assets/events/interstellar.jpg" alt="Interstellar" loading="lazy" />
+            </div>
+            <div className="hg-item hg-b">
+              <img src="assets/sala/zona-vip-escenario.jpg" alt="Zona VIP" loading="lazy" />
+            </div>
+            <div className="hg-item hg-c">
+              <img src="assets/events/fever.jpg" alt="Fever" loading="lazy" />
+            </div>
+            <div className="hg-item hg-d">
+              <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} src="uploads/video-hero-condado.mp4" />
+            </div>
+            <div className="hg-item hg-e">
+              <img src="assets/events/prive.jpg" alt="Privé" loading="lazy" />
+            </div>
+            <div className="hg-item hg-f">
+              <img src="assets/sala/sala-condado-01.jpg" alt="Sala Condado" loading="lazy" />
+            </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, textAlign: 'left' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, textAlign: 'left' }}>
             {[
               { icon: '✦', title: 'Producción artística', desc: 'Shows en vivo, performers y escenografías diseñadas para impactar.' },
               { icon: '◈', title: 'Efectos especiales', desc: 'Llamas, CO₂, confeti y pirotecnia. Tecnología de primer nivel.' },
               { icon: '◉', title: 'Sonido L-Acoustics', desc: 'Sistema calibrado para que cada frecuencia se sienta en el cuerpo.' },
-              { icon: '◆', title: 'Exclusividad real', desc: 'Acceso controlado, zonas premium y atención dedicada.' },
             ].map((item, i) => (
               <div key={i} style={{
                 background: 'var(--night-3)', border: '1px solid var(--w08)',
@@ -197,6 +209,46 @@ function Home({ onNav }) {
             <a href="#/sala" onClick={(e) => { e.preventDefault(); onNav('/sala'); }} className="btn btn-ghost">Conocer la sala →</a>
           </div>
         </div>
+        <style>{`
+          .home-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 300px 240px 260px;
+            gap: 10px;
+          }
+          @media (min-width: 600px) { .home-gallery { gap: 12px; } }
+          @media (min-width: 1200px) { .home-gallery { gap: 14px; grid-template-rows: 340px 260px 300px; } }
+          .hg-item {
+            overflow: hidden;
+            background: var(--night-3);
+            position: relative;
+            border-radius: var(--radius-md);
+          }
+          .hg-item img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 600ms ease;
+          }
+          .hg-item:hover img { transform: scale(1.04); }
+          .hg-a { grid-column: 1; grid-row: 1 / 3; }
+          .hg-b { grid-column: 2; grid-row: 1; }
+          .hg-c { grid-column: 3; grid-row: 1; }
+          .hg-d { grid-column: 2; grid-row: 2 / 4; }
+          .hg-e { grid-column: 3; grid-row: 2 / 4; }
+          .hg-f { grid-column: 1; grid-row: 3; }
+          @media (max-width: 700px) {
+            .home-gallery {
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: 200px 200px 200px;
+            }
+            .hg-a { grid-column: 1; grid-row: 1 / 3; }
+            .hg-b { grid-column: 2; grid-row: 1; }
+            .hg-c { grid-column: 2; grid-row: 2; }
+            .hg-d { grid-column: 1 / 3; grid-row: 3; }
+            .hg-e { display: none; }
+            .hg-f { display: none; }
+          }
+        `}</style>
       </section>
 
       {/* VIP teaser */}

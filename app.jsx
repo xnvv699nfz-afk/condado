@@ -17,11 +17,11 @@ const VIBES = {
 
 // Display type — different typographic personalities
 const DISPLAYS = {
-  condensed: { name: 'Condensed', family: "'Oxanium', sans-serif", weight: 800, tracking: '-0.5px', italicWeight: 300, googleFonts: null },
+  condensed: { name: 'Condensed', family: "'Barlow Condensed', sans-serif", weight: 800, tracking: '-0.5px', italicWeight: 300, googleFonts: 'Barlow+Condensed:wght@300;400;600;700;800' },
   editorial: { name: 'Editorial', family: "'Playfair Display', 'Times New Roman', serif", weight: 900, tracking: '-1.5px', italicWeight: 400, googleFonts: 'Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700' },
   hyper:     { name: 'Hyper',     family: "'Anton', 'Arial Black', sans-serif", weight: 400, tracking: '0.5px', italicWeight: 400, googleFonts: 'Anton' },
   mono:      { name: 'Mono',      family: "'Space Grotesk', system-ui, sans-serif", weight: 700, tracking: '-1px', italicWeight: 400, googleFonts: 'Space+Grotesk:wght@400;500;700' },
-  oxanium:   { name: 'Oxanium',   family: "'Oxanium', sans-serif", weight: 700, tracking: '-0.5px', italicWeight: 400, googleFonts: null },
+  oxanium:   { name: 'Oxanium',   family: "'Barlow', sans-serif", weight: 700, tracking: '-0.5px', italicWeight: 400, googleFonts: 'Barlow:wght@300;400;500;700' },
 };
 
 // Intensity — spacing, type scale, gradient drama
