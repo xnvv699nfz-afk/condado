@@ -1071,7 +1071,7 @@ function Footer({ onNav }) {
               padding: '6px 12px', borderRadius: 999, marginTop: 18,
               fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)',
             }}>
-              <strong>#94</strong> · Mejor Club del Mundo
+              <strong>TOP #94</strong>Mejores clubs del mundo 2025
             </div>
             <p style={{ fontSize: 13, color: 'var(--w60)', lineHeight: 1.7, marginTop: 22, maxWidth: 280 }}>
               Calle Marqués de Campo, 42<br/>
@@ -1140,10 +1140,10 @@ const EVENTS = [
 ];
 
 const ARTISTS = [
-  { name: 'Arcángel',           genre: 'Reggaeton',      img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80' },
-  { name: 'Yan Block',          genre: 'Urban · Trap',   img: 'https://images.unsplash.com/photo-1571266028243-d220ff95ca75?w=600&q=80' },
-  { name: 'Casper Mágico',      genre: 'Trap · Urban',   img: 'https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=600&q=80' },
-  { name: 'Luar la L',          genre: 'Trap Latino',    img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80' },
+  { name: 'Luar la L',          genre: 'Trap Latino',   img: 'assets/artists/luar-la-condado.jpg' },
+  { name: 'Roa',          genre: 'Urban · Trap',   img: 'assets/artists/roa-condado.jpg' },
+  { name: 'JC Reyes',      genre: 'Trap · Urban',   img: 'assets/artists/jc-reyes-condado.jpg' },
+  { name: 'Luc Loren',          genre: 'Trap Latino',    img: 'assets/artists/lucloren-condado.jpg' },
   { name: 'Roa',                genre: 'Urban · Trap',   img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80' },
   { name: 'Young Cister',       genre: 'Trap',           img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80' },
   { name: 'Xivo y Fernandezz',  genre: 'Urban',          img: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=600&q=80' },
@@ -1228,7 +1228,7 @@ function Home({ onNav }) {
     <div className="page-enter">
       {/* HERO */}
       <section style={{ position: 'relative', minHeight: 'var(--hero-min)', display: 'flex', alignItems: 'flex-end', overflow: 'hidden' }}>
-        <img src="assets/hero.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} src="uploads/video-hero-condado.mp4" />
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, rgba(8,5,9,0.4) 0%, rgba(8,5,9,0.4) 45%, rgba(8,5,9,0.88) 100%)',
@@ -1240,7 +1240,7 @@ function Home({ onNav }) {
             padding: '6px 14px', borderRadius: 999, marginBottom: 22,
             fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)',
           }}>
-            <strong>#94</strong> · Mejor club del mundo · Denia
+            <strong>TOP #94</strong>Mejores clubs del mundo 2025
           </div>
           <h1 className="serif" style={{
             fontSize: 'calc(clamp(54px, 9vw, 120px) * var(--type-scale))',
@@ -1297,14 +1297,10 @@ function Home({ onNav }) {
 
       {/* DENIA BREAK */}
       <div style={{ position: 'relative', padding: 'calc(120px * var(--pad-scale)) 24px', overflow: 'hidden', textAlign: 'center' }}>
+        <img src="assets/sala/sala-condado-01.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(to bottom, rgba(8,5,9,0.55) 0%, rgba(8,5,9,0.1) 40%, rgba(8,5,9,0.7) 100%), var(--hero-grad)',
-        }}></div>
-        <div style={{
-          position: 'absolute', top: '15%', left: '18%',
-          width: 420, height: 280, filter: 'blur(40px)',
-          background: 'radial-gradient(ellipse, rgba(255,195,80,0.22) 0%, transparent 70%)',
+          background: 'linear-gradient(to bottom, rgba(8,5,9,0.65) 0%, rgba(8,5,9,0.45) 40%, rgba(8,5,9,0.75) 100%)',
         }}></div>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 820, margin: '0 auto' }}>
           <span className="eyebrow" style={{ marginBottom: 12 }}>Costa Blanca · Denia · Alicante</span>

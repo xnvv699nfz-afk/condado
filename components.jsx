@@ -186,7 +186,7 @@ const EVENTS = [
 ];
 
 const ARTISTS = [
-  { name: 'Arcángel',           genre: 'Reggaeton',      img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80' },
+  { name: 'Luar la L',          genre: 'Trap Latino',   img: 'assets/artists/luar-la-condado.jpg' },
   { name: 'Yan Block',          genre: 'Urban · Trap',   img: 'https://images.unsplash.com/photo-1571266028243-d220ff95ca75?w=600&q=80' },
   { name: 'Casper Mágico',      genre: 'Trap · Urban',   img: 'https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=600&q=80' },
   { name: 'Luar la L',          genre: 'Trap Latino',    img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80' },

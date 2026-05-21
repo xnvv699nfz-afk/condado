@@ -6,7 +6,7 @@ function Home({ onNav }) {
     <div className="page-enter">
       {/* HERO */}
       <section style={{ position: 'relative', minHeight: 'var(--hero-min)', display: 'flex', alignItems: 'flex-end', overflow: 'hidden' }}>
-        <img src="assets/hero.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} src="uploads/video-hero-condado.mp4" />
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, rgba(8,5,9,0.4) 0%, rgba(8,5,9,0.4) 45%, rgba(8,5,9,0.88) 100%)',
@@ -18,7 +18,7 @@ function Home({ onNav }) {
             padding: '6px 14px', borderRadius: 999, marginBottom: 22,
             fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)',
           }}>
-            <strong>#94</strong> · Mejor club del mundo · Denia
+            <strong>TOP #94</strong>Mejores clubs del mundo 2025
           </div>
           <h1 className="serif" style={{
             fontSize: 'calc(clamp(54px, 9vw, 120px) * var(--type-scale))',
@@ -75,14 +75,10 @@ function Home({ onNav }) {
 
       {/* DENIA BREAK */}
       <div style={{ position: 'relative', padding: 'calc(120px * var(--pad-scale)) 24px', overflow: 'hidden', textAlign: 'center' }}>
+        <img src="assets/sala/sala-condado-01.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(to bottom, rgba(8,5,9,0.55) 0%, rgba(8,5,9,0.1) 40%, rgba(8,5,9,0.7) 100%), var(--hero-grad)',
-        }}></div>
-        <div style={{
-          position: 'absolute', top: '15%', left: '18%',
-          width: 420, height: 280, filter: 'blur(40px)',
-          background: 'radial-gradient(ellipse, rgba(255,195,80,0.22) 0%, transparent 70%)',
+          background: 'linear-gradient(to bottom, rgba(8,5,9,0.65) 0%, rgba(8,5,9,0.45) 40%, rgba(8,5,9,0.75) 100%)',
         }}></div>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 820, margin: '0 auto' }}>
           <span className="eyebrow" style={{ marginBottom: 12 }}>Costa Blanca · Denia · Alicante</span>
