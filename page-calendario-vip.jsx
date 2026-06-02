@@ -161,16 +161,16 @@ function Calendario({ onNav }) {
         @media (min-width: 768px) {
           .cc-controls { flex-direction: row; align-items: center; justify-content: space-between; }
         }
-        .cc-view-group, .cc-month-group { display: flex; gap: 6px; flex-wrap: wrap; }
+        .cc-view-group, .cc-month-group { display: flex; gap: 8px; flex-wrap: wrap; }
         .cc-btn {
           display: inline-flex; align-items: center; gap: 7px;
-          padding: 8px 16px;
-          font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
-          color: var(--w60); border: 1px solid var(--w15); border-radius: 3px;
+          padding: 8px 18px;
+          font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+          color: var(--w60); border: 1px solid var(--w15); border-radius: 999px;
           transition: all 180ms ease; white-space: nowrap;
         }
-        .cc-btn:hover:not(.cc-active) { color: var(--white); border-color: var(--w40); }
-        .cc-btn.cc-active { background: var(--white); color: var(--night); border-color: var(--white); }
+        .cc-btn:hover:not(.cc-active) { color: var(--white); border-color: var(--w60); }
+        .cc-btn.cc-active { background: var(--gold); color: var(--night); border-color: var(--gold); font-weight: 700; }
 
         /* Grid view */
         .cc-grid { display: grid; grid-template-columns: 1fr; gap: 40px 16px; }
