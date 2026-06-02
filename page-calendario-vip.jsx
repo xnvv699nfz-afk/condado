@@ -23,14 +23,38 @@ function PageHeader({ eyebrow, title, subtitle }) {
   );
 }
 
-const MONTH_NUM = { abr: 4, may: 5, jun: 6, jul: 7, ago: 8 };
+const MONTH_NUM  = { abr: 4, may: 5, jun: 6, jul: 7, ago: 8 };
+const MONTH_ABR  = { abr: 'ABR', may: 'MAY', jun: 'JUN', jul: 'JUL', ago: 'AGO' };
+const MONTH_NAME = { abr: 'Abril', may: 'Mayo', jun: 'Junio', jul: 'Julio', ago: 'Agosto' };
+const WEEK_DAYS_ES = ['LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB', 'DOM'];
 
 function Calendario({ onNav }) {
+  const [month, setMonth] = useState('all');
+  const [view,  setView]  = useState('grid');
+
   const today = new Date();
   const futureEvents = EVENTS.filter((ev) => {
     const evDate = new Date(2026, (MONTH_NUM[ev.monthKey] || 1) - 1, parseInt(ev.day, 10));
     return evDate >= today;
   });
+
+  const availableMonths = [...new Set(futureEvents.map(ev => ev.monthKey))];
+  const filtered     = month === 'all' ? futureEvents : futureEvents.filter(e => e.monthKey === month);
+  const monthsToShow = month === 'all' ? availableMonths : [month];
+
+  function buildCells(mk) {
+    const m      = MONTH_NUM[mk];
+    const dow    = new Date(2026, m - 1, 1).getDay();
+    const offset = dow === 0 ? 6 : dow - 1;
+    const total  = new Date(2026, m, 0).getDate();
+    const cells  = Array(offset).fill(null);
+    for (let d = 1; d <= total; d++) cells.push(d);
+    while (cells.length % 7) cells.push(null);
+    return cells;
+  }
+
+  const evMap = {};
+  filtered.forEach(ev => { evMap[`${ev.monthKey}-${parseInt(ev.day, 10)}`] = ev; });
 
   return (
     <div className="page-enter">
@@ -43,130 +67,190 @@ function Calendario({ onNav }) {
       <div style={{ padding: '0 24px 100px' }}>
         <div className="container-wide" style={{ margin: '0 auto' }}>
 
-          <p className="micro" style={{ marginBottom: 36 }}>
-            <strong style={{ color: 'var(--gold)' }}>{futureEvents.length}</strong>&nbsp; próximos eventos
-          </p>
-
-          {futureEvents.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--w40)' }}>
-              <p>No hay próximos eventos disponibles.</p>
+          {/* ── Controles ── */}
+          <div className="cc-controls">
+            <div className="cc-view-group">
+              <button className={`cc-btn${view === 'grid'     ? ' cc-active' : ''}`} onClick={() => setView('grid')}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                Grid
+              </button>
+              <button className={`cc-btn${view === 'calendar' ? ' cc-active' : ''}`} onClick={() => setView('calendar')}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>
+                Calendario
+              </button>
             </div>
-          ) : (
-            <div className="cal-grid">
-              {futureEvents.map((ev) => (
-                <article key={ev.id} className="cal-card">
-                  <div className="cal-card-img-wrap">
-                    <img src={ev.image} alt={ev.name} className="cal-card-img" />
-                    <div className="cal-card-img-grad"></div>
-                    <div className="cal-card-date-badge">
-                      <span className="serif" style={{ fontSize: 36, fontWeight: 800, lineHeight: 1, letterSpacing: -1, display: 'block' }}>{ev.day}</span>
-                      <span style={{ fontSize: 9, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)', display: 'block', marginTop: 2 }}>{ev.dayName}</span>
-                      <span style={{ fontSize: 9, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--w60)', display: 'block' }}>{ev.month}</span>
-                    </div>
-                    {ev.badge && <span className="cal-card-badge">{ev.badge}</span>}
-                  </div>
-                  <div className="cal-card-body">
-                    <div style={{ flex: 1 }}>
-                      <p style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 6 }}>{ev.dayName} {ev.day} {ev.month}</p>
-                      <h3 className="serif cal-card-title">{ev.name}</h3>
-                      <p className="cal-card-artist">{ev.support}</p>
-                    </div>
-                    <button className="btn btn-gold" style={{ width: '100%', marginTop: 18 }} onClick={() => onNav('/tickets')}>
-                      Tickets y VIP
-                    </button>
-                  </div>
-                </article>
+            <div className="cc-month-group">
+              <button className={`cc-btn${month === 'all' ? ' cc-active' : ''}`} onClick={() => setMonth('all')}>Todos</button>
+              {availableMonths.map(mk => (
+                <button key={mk} className={`cc-btn${month === mk ? ' cc-active' : ''}`} onClick={() => setMonth(mk)}>
+                  {MONTH_ABR[mk]}
+                </button>
               ))}
             </div>
+          </div>
+
+          {/* ── Vista Grid ── */}
+          {view === 'grid' && (
+            filtered.length === 0
+              ? <div style={{ textAlign: 'center', padding: '80px 0', color: 'var(--w40)' }}>No hay eventos disponibles.</div>
+              : (
+                <div className="cc-grid">
+                  {filtered.map(ev => (
+                    <article key={ev.id} className="cc-card">
+                      <p className="cc-card-hdr">{ev.dayName} · {ev.day} {ev.month.toUpperCase()}</p>
+                      <div className="cc-card-img-wrap">
+                        <img src={ev.image} alt={ev.name} className="cc-card-img" />
+                        {ev.badge && <span className="cc-badge">{ev.badge}</span>}
+                      </div>
+                      <div className="cc-card-body">
+                        <p className="cc-card-date">{ev.dayName} {ev.day} {ev.month.toUpperCase()}</p>
+                        <h3 className="serif cc-card-title">{ev.name}</h3>
+                        <p className="cc-card-artist">{ev.support}</p>
+                        <button className="btn btn-gold cc-card-cta" onClick={() => onNav('/tickets')}>Tickets y VIP</button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )
           )}
+
+          {/* ── Vista Calendario ── */}
+          {view === 'calendar' && (
+            <div>
+              {monthsToShow.map(mk => {
+                const cells = buildCells(mk);
+                return (
+                  <div key={mk} className="cc-month">
+                    <p className="cc-month-title">{MONTH_NAME[mk].toUpperCase()} 2026</p>
+                    <div className="cc-cal-grid">
+                      {WEEK_DAYS_ES.map(d => <div key={d} className="cc-cal-hdr">{d}</div>)}
+                      {cells.map((day, i) => {
+                        const ev = day ? evMap[`${mk}-${day}`] : null;
+                        return (
+                          <div key={i}
+                               className={`cc-cal-cell${ev ? ' has-ev' : ''}${!day ? ' pad' : ''}`}
+                               onClick={ev ? () => onNav('/tickets') : undefined}>
+                            {day && <span className="cc-cal-num">{day}</span>}
+                            {ev  && <img src={ev.image} alt={ev.name} className="cc-cal-img" />}
+                            {ev  && (
+                              <div className="cc-cal-info">
+                                <p className="cc-cal-evname">{ev.name}</p>
+                                <p className="cc-cal-evartist">{ev.support}</p>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
         </div>
       </div>
 
       <style>{`
-        .cal-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 20px;
+        /* Controls */
+        .cc-controls {
+          display: flex; flex-direction: column; gap: 14px;
+          margin-bottom: 40px; padding-bottom: 32px;
+          border-bottom: 1px solid var(--w08);
         }
-        @media (min-width: 640px) {
-          .cal-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        @media (min-width: 768px) {
+          .cc-controls { flex-direction: row; align-items: center; justify-content: space-between; }
         }
-        @media (min-width: 1024px) {
-          .cal-grid { grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .cc-view-group, .cc-month-group { display: flex; gap: 6px; flex-wrap: wrap; }
+        .cc-btn {
+          display: inline-flex; align-items: center; gap: 7px;
+          padding: 8px 16px;
+          font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
+          color: var(--w60); border: 1px solid var(--w15); border-radius: 3px;
+          transition: all 180ms ease; white-space: nowrap;
         }
+        .cc-btn:hover:not(.cc-active) { color: var(--white); border-color: var(--w40); }
+        .cc-btn.cc-active { background: var(--white); color: var(--night); border-color: var(--white); }
 
-        .cal-card {
-          background: var(--night-2);
-          border: 1px solid var(--w08);
-          border-radius: var(--radius-lg);
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
-        }
-        .cal-card:hover {
-          border-color: var(--gold-border);
-          transform: translateY(-4px);
-          box-shadow: 0 24px 50px rgba(0,0,0,0.45);
-        }
+        /* Grid view */
+        .cc-grid { display: grid; grid-template-columns: 1fr; gap: 40px 16px; }
+        @media (min-width: 560px)  { .cc-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .cc-grid { grid-template-columns: repeat(5, 1fr); gap: 40px 20px; } }
 
-        .cal-card-img-wrap {
-          position: relative;
-          aspect-ratio: 3 / 4;
-          overflow: hidden;
+        .cc-card { display: flex; flex-direction: column; }
+        .cc-card-hdr {
+          font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+          color: var(--w40); margin-bottom: 10px; font-weight: 500;
         }
-        .cal-card-img {
-          width: 100%; height: 100%;
-          object-fit: cover;
-          transition: transform 600ms ease;
-        }
-        .cal-card:hover .cal-card-img { transform: scale(1.05); }
-        .cal-card-img-grad {
-          position: absolute; inset: 0;
-          background: linear-gradient(to top, rgba(8,5,9,0.75) 0%, transparent 55%);
-        }
-
-        .cal-card-date-badge {
-          position: absolute;
-          top: 14px; left: 14px;
-          background: rgba(8,5,9,0.75);
-          backdrop-filter: blur(8px);
-          border: 1px solid var(--w15);
-          border-radius: var(--radius-sm);
-          padding: 10px 14px;
-          text-align: center;
-          min-width: 54px;
-        }
-
-        .cal-card-badge {
-          position: absolute;
-          top: 14px; right: 14px;
-          background: var(--gold);
-          color: var(--night);
+        .cc-card-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; border-radius: 3px; }
+        .cc-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
+        .cc-card:hover .cc-card-img { transform: scale(1.04); }
+        .cc-badge {
+          position: absolute; top: 10px; right: 10px;
+          background: var(--gold); color: var(--night);
           font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-          padding: 5px 11px; border-radius: 999px;
+          padding: 4px 10px; border-radius: 999px;
         }
-
-        .cal-card-body {
-          padding: 20px 20px 22px;
-          display: flex;
-          flex-direction: column;
-          flex: 1;
+        .cc-card-body { padding: 12px 0 0; }
+        .cc-card-date { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--w60); margin-bottom: 6px; }
+        .cc-card-title {
+          font-size: clamp(15px, 2vw, 19px); font-weight: 800;
+          text-transform: uppercase; letter-spacing: -0.2px; line-height: 1.05; margin-bottom: 5px;
         }
+        .cc-card-artist { font-size: 12px; color: var(--w40); line-height: 1.4; }
+        .cc-card-cta { width: 100%; margin-top: 14px; font-size: 11px; }
 
-        .cal-card-title {
-          font-size: clamp(20px, 3vw, 26px);
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: -0.3px;
-          line-height: 1.05;
-          margin-bottom: 8px;
+        /* Calendar view */
+        .cc-month { margin-bottom: 60px; }
+        .cc-month-title {
+          font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+          color: var(--w60); text-align: center; margin-bottom: 20px; font-weight: 500;
         }
+        .cc-cal-grid {
+          display: grid; grid-template-columns: repeat(7, 1fr);
+          border-top: 1px solid var(--w08); border-left: 1px solid var(--w08);
+        }
+        .cc-cal-hdr {
+          padding: 10px 0; text-align: center;
+          font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+          color: var(--w40); font-weight: 600;
+          border-right: 1px solid var(--w08); border-bottom: 1px solid var(--w08);
+        }
+        .cc-cal-cell {
+          position: relative; aspect-ratio: 3/4;
+          border-right: 1px solid var(--w08); border-bottom: 1px solid var(--w08);
+          overflow: hidden;
+        }
+        .cc-cal-cell.has-ev { cursor: pointer; }
+        .cc-cal-num {
+          position: absolute; top: 7px; left: 9px;
+          font-size: 10px; color: var(--w40); font-weight: 500; z-index: 2; line-height: 1;
+        }
+        .cc-cal-cell.has-ev .cc-cal-num { color: rgba(255,255,255,0.9); text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .cc-cal-img {
+          position: absolute; inset: 0; width: 100%; height: 100%;
+          object-fit: cover; transition: transform 400ms ease;
+        }
+        .cc-cal-cell:hover .cc-cal-img { transform: scale(1.05); }
+        .cc-cal-info {
+          position: absolute; inset: 0;
+          background: linear-gradient(to top, rgba(8,5,9,0.92) 0%, rgba(8,5,9,0.3) 55%, transparent 100%);
+          display: flex; flex-direction: column; justify-content: flex-end;
+          padding: 8px; opacity: 0; transition: opacity 220ms ease;
+        }
+        .cc-cal-cell:hover .cc-cal-info { opacity: 1; }
+        .cc-cal-evname {
+          font-size: clamp(8px, 1.1vw, 12px); font-weight: 800;
+          text-transform: uppercase; line-height: 1.1; color: var(--white);
+          font-family: var(--font-serif, 'Barlow Condensed', sans-serif);
+        }
+        .cc-cal-evartist { font-size: clamp(7px, 0.85vw, 10px); color: var(--w60); margin-top: 2px; }
 
-        .cal-card-artist {
-          font-size: 13px;
-          color: var(--w60);
-          line-height: 1.5;
+        @media (max-width: 640px) {
+          .cc-cal-hdr { font-size: 7px; letter-spacing: 1px; padding: 6px 0; }
+          .cc-cal-num { font-size: 8px; top: 4px; left: 5px; }
+          .cc-cal-info { opacity: 1; padding: 5px; }
+          .cc-cal-evartist { display: none; }
         }
       `}</style>
     </div>
