@@ -67,6 +67,7 @@ function Calendario({ onNav }) {
                   </div>
                   <div className="cal-card-body">
                     <div style={{ flex: 1 }}>
+                      <p style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 6 }}>{ev.dayName} {ev.day} {ev.month}</p>
                       <h3 className="serif cal-card-title">{ev.name}</h3>
                       <p className="cal-card-artist">{ev.support}</p>
                     </div>
@@ -91,7 +92,7 @@ function Calendario({ onNav }) {
           .cal-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
         }
         @media (min-width: 1024px) {
-          .cal-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+          .cal-grid { grid-template-columns: repeat(5, 1fr); gap: 20px; }
         }
 
         .cal-card {
