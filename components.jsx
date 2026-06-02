@@ -2,15 +2,10 @@
 const { useState, useEffect, useRef } = React;
 
 function Logo({ size = 'md' }) {
-  const dim = size === 'sm' ? 24 : 30;
-  const txt = size === 'sm' ? 14 : 17;
+  const h = size === 'sm' ? 32 : 40;
   return (
-    <a href="#/" onClick={(e) => { e.preventDefault(); window.location.hash = '/'; }} className="logo" style={{ fontSize: txt }}>
-      <span className="logo-mark" style={{ width: dim, height: dim }}></span>
-      <span className="logo-text">
-        <span>Condado</span>
-        <small>CLUB</small>
-      </span>
+    <a href="#/" onClick={(e) => { e.preventDefault(); window.location.hash = '/'; }} className="logo">
+      <img src="assets/logos/logo-condado.png" alt="Condado Club" style={{ height: h, width: 'auto', display: 'block' }} />
     </a>
   );
 }
@@ -186,16 +181,16 @@ const EVENTS = [
 ];
 
 const ARTISTS = [
-  { name: 'Luar la L',          genre: 'Trap Latino',   img: 'assets/artists/luar-la-condado.jpg' },
-  { name: 'Yan Block',          genre: 'Urban · Trap',   img: 'https://images.unsplash.com/photo-1571266028243-d220ff95ca75?w=600&q=80' },
-  { name: 'Casper Mágico',      genre: 'Trap · Urban',   img: 'https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=600&q=80' },
-  { name: 'Luar la L',          genre: 'Trap Latino',    img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80' },
-  { name: 'Roa',                genre: 'Urban · Trap',   img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80' },
-  { name: 'Young Cister',       genre: 'Trap',           img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80' },
-  { name: 'Xivo y Fernandezz',  genre: 'Urban',          img: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=600&q=80' },
-  { name: 'Dann Valero',        genre: 'Urban · Trap',   img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&q=80' },
-  { name: 'Alvamaice',          genre: 'Urban',          img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&sat=-100' },
-  { name: 'Taron',              genre: 'House',          img: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80' },
+  { name: 'Arcángel',      genre: 'Reggaeton · Trap',   img: 'assets/artists/luar-la-condado.jpg' },
+  { name: 'Bryant Myers',  genre: 'Trap · Hip-Hop Latino',   img: 'https://images.unsplash.com/photo-1571266028243-d220ff95ca75?w=600&q=80' },
+  { name: 'Hades 66',      genre: 'Trap · Drill',   img: 'https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=600&q=80' },
+  { name: 'JC Reyes',      genre: 'Trap · Urbano',    img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80' },
+  { name: 'Karol G',       genre: 'Reggaeton · Latin Pop',   img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80' },
+  { name: 'Luar La L',     genre: 'Trap · Drill',           img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80' },
+  { name: 'Mike Towers',   genre: 'Trap · Reggaeton',          img: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=600&q=80' },
+  { name: 'Ñengo Flow',    genre: 'Reggaetón · Latin Trap',   img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&q=80' },
+  { name: 'Roa',           genre: 'Urbano · Trap',          img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&sat=-100' },
+  { name: 'Saiko',              genre: 'Reggaeton · Trap',          img: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80' },
   { name: 'Angel Belmonte',     genre: 'Electronic',     img: 'https://images.unsplash.com/photo-1571266028243-d220ff95ca75?w=600&q=80&hue=240' },
   { name: 'Mitch van Staveren', genre: 'House · Tech',   img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80&hue=120' },
 ];

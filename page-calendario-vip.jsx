@@ -23,130 +23,149 @@ function PageHeader({ eyebrow, title, subtitle }) {
   );
 }
 
+const MONTH_NUM = { abr: 4, may: 5, jun: 6, jul: 7, ago: 8 };
+
 function Calendario({ onNav }) {
-  const [month, setMonth] = useState('all');
-  const [view, setView] = useState('list'); // 'list' or 'grid'
-  const filtered = month === 'all' ? EVENTS : EVENTS.filter((e) => e.monthKey === month);
+  const today = new Date();
+  const futureEvents = EVENTS.filter((ev) => {
+    const evDate = new Date(2026, (MONTH_NUM[ev.monthKey] || 1) - 1, parseInt(ev.day, 10));
+    return evDate >= today;
+  });
 
   return (
     <div className="page-enter">
       <PageHeader
         eyebrow="Agenda completa · 2026"
-        title='Calendario<br/><em style="font-style:normal;font-weight:300;color:var(--gold)">de eventos</em>'
-        subtitle="Toda la temporada en Condado Club. Filtra por mes, descubre los próximos shows y reserva tu entrada antes de que se agoten."
+        title='Próximos<br/><em style="font-style:normal;font-weight:300;color:var(--gold)">eventos</em>'
+        subtitle="Toda la temporada en Condado Club. Descubre los próximos shows y reserva tu entrada antes de que se agoten."
       />
 
       <div style={{ padding: '0 24px 100px' }}>
         <div className="container-wide" style={{ margin: '0 auto' }}>
 
-          {/* Filters bar */}
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', gap: 16,
-            justifyContent: 'space-between', alignItems: 'center',
-            paddingBottom: 24, borderBottom: '1px solid var(--w08)',
-            marginBottom: 32,
-          }}>
-            <div style={{ display: 'flex', gap: 8, overflowX: 'auto' }} className="no-scrollbar">
-              {[
-                { k: 'all', l: 'Todos' },
-                { k: 'abr', l: 'Abril' },
-                { k: 'may', l: 'Mayo' },
-                { k: 'jun', l: 'Junio' },
-                { k: 'jul', l: 'Julio' },
-                { k: 'ago', l: 'Agosto' },
-              ].map((m) => (
-                <button key={m.k} onClick={() => setMonth(m.k)} className={`chip${month === m.k ? ' active' : ''}`}>
-                  {m.l}
-                </button>
-              ))}
-            </div>
-            <div style={{ display: 'flex', gap: 4, background: 'var(--w05)', border: '1px solid var(--w15)', borderRadius: 999, padding: 4 }}>
-              <button onClick={() => setView('list')} className={`view-toggle${view === 'list' ? ' active' : ''}`}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-                Lista
-              </button>
-              <button onClick={() => setView('grid')} className={`view-toggle${view === 'grid' ? ' active' : ''}`}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                Grid
-              </button>
-            </div>
-          </div>
-
-          <p className="micro" style={{ marginBottom: 28 }}>
-            <strong style={{ color: 'var(--gold)' }}>{filtered.length}</strong> &nbsp;eventos · Filtro: {month === 'all' ? 'Todos los meses' : month.toUpperCase()}
+          <p className="micro" style={{ marginBottom: 36 }}>
+            <strong style={{ color: 'var(--gold)' }}>{futureEvents.length}</strong>&nbsp; próximos eventos
           </p>
 
-          {view === 'grid' ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
-              {filtered.map((ev) => <EventCard key={ev.id} event={ev} onNav={onNav} width="100%" />)}
+          {futureEvents.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--w40)' }}>
+              <p>No hay próximos eventos disponibles.</p>
             </div>
           ) : (
-            <div>
-              {filtered.map((ev, i) => (
-                <div key={ev.id}>
-                  <div className="cal-row">
-                    <div className="cal-date">
-                      <span className="serif" style={{ fontSize: 40, fontWeight: 800, lineHeight: 1, letterSpacing: -1 }}>{ev.day}</span>
-                      <span style={{ fontSize: 9, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)' }}>{ev.dayName}</span>
-                      <span style={{ fontSize: 9, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--w40)' }}>{ev.month}</span>
+            <div className="cal-grid">
+              {futureEvents.map((ev) => (
+                <article key={ev.id} className="cal-card">
+                  <div className="cal-card-img-wrap">
+                    <img src={ev.image} alt={ev.name} className="cal-card-img" />
+                    <div className="cal-card-img-grad"></div>
+                    <div className="cal-card-date-badge">
+                      <span className="serif" style={{ fontSize: 36, fontWeight: 800, lineHeight: 1, letterSpacing: -1, display: 'block' }}>{ev.day}</span>
+                      <span style={{ fontSize: 9, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)', display: 'block', marginTop: 2 }}>{ev.dayName}</span>
+                      <span style={{ fontSize: 9, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--w60)', display: 'block' }}>{ev.month}</span>
                     </div>
-                    <img src={ev.image} alt={ev.name} className="cal-poster" />
-                    <div className="cal-info">
-                      <p style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 4 }}>
-                        23:00 · Puertas {ev.sold && <><span style={{ color: 'var(--w40)' }}> · </span><span style={{ color: 'var(--w40)' }}>{ev.sold}</span></>}
-                      </p>
-                      <h3 className="serif" style={{ fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: -0.3, lineHeight: 1, marginBottom: 6 }}>{ev.name}</h3>
-                      <p style={{ fontSize: 13.5, color: 'var(--w60)', marginBottom: 2 }}>{ev.support}</p>
-                      <p style={{ fontSize: 10, letterSpacing: 1.5, textTransform: 'uppercase', color: 'var(--w40)' }}>{ev.genre}</p>
-                    </div>
-                    <div className="cal-actions">
-                      <button className="btn btn-gold btn-sm" onClick={() => onNav('/tickets')}>Comprar entrada</button>
-                      <button className="btn btn-ghost btn-sm" onClick={() => onNav('/mesas-vip')}>Reservar VIP</button>
-                    </div>
+                    {ev.badge && <span className="cal-card-badge">{ev.badge}</span>}
                   </div>
-                  {i < filtered.length - 1 && <div style={{ height: 1, background: 'var(--w08)' }}></div>}
-                </div>
+                  <div className="cal-card-body">
+                    <div style={{ flex: 1 }}>
+                      <h3 className="serif cal-card-title">{ev.name}</h3>
+                      <p className="cal-card-artist">{ev.support}</p>
+                    </div>
+                    <button className="btn btn-gold" style={{ width: '100%', marginTop: 18 }} onClick={() => onNav('/tickets')}>
+                      Tickets y VIP
+                    </button>
+                  </div>
+                </article>
               ))}
-            </div>
-          )}
-
-          {filtered.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--w40)' }}>
-              <p>Sin eventos en este mes.</p>
             </div>
           )}
         </div>
       </div>
 
       <style>{`
-        .view-toggle {
-          display: inline-flex; align-items: center; gap: 6px;
-          padding: 8px 14px;
-          font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500;
-          color: var(--w60);
-          border-radius: 999px;
-          transition: all 200ms ease;
-        }
-        .view-toggle.active { background: var(--gold); color: var(--night); font-weight: 700; }
-
-        .cal-row {
+        .cal-grid {
           display: grid;
-          grid-template-columns: 60px 1fr;
+          grid-template-columns: 1fr;
           gap: 20px;
-          align-items: center;
-          padding: 22px 0;
-          transition: all 200ms ease;
         }
-        .cal-row:hover { background: var(--w05); padding: 22px 12px; margin: 0 -12px; border-radius: var(--radius-md); }
-        .cal-date { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-        .cal-poster { display: none; width: 110px; height: 78px; object-fit: cover; border-radius: var(--radius-sm); }
-        .cal-info { min-width: 0; }
-        .cal-actions { grid-column: 1 / -1; display: flex; flex-direction: row; gap: 8px; }
-        .cal-actions .btn { flex: 1; }
-        @media (min-width: 900px) {
-          .cal-row { grid-template-columns: 70px 110px 1fr auto; }
-          .cal-poster { display: block; }
-          .cal-actions { grid-column: auto; flex-direction: column; min-width: 170px; }
+        @media (min-width: 640px) {
+          .cal-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        }
+        @media (min-width: 1024px) {
+          .cal-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        }
+
+        .cal-card {
+          background: var(--night-2);
+          border: 1px solid var(--w08);
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+        }
+        .cal-card:hover {
+          border-color: var(--gold-border);
+          transform: translateY(-4px);
+          box-shadow: 0 24px 50px rgba(0,0,0,0.45);
+        }
+
+        .cal-card-img-wrap {
+          position: relative;
+          aspect-ratio: 3 / 4;
+          overflow: hidden;
+        }
+        .cal-card-img {
+          width: 100%; height: 100%;
+          object-fit: cover;
+          transition: transform 600ms ease;
+        }
+        .cal-card:hover .cal-card-img { transform: scale(1.05); }
+        .cal-card-img-grad {
+          position: absolute; inset: 0;
+          background: linear-gradient(to top, rgba(8,5,9,0.75) 0%, transparent 55%);
+        }
+
+        .cal-card-date-badge {
+          position: absolute;
+          top: 14px; left: 14px;
+          background: rgba(8,5,9,0.75);
+          backdrop-filter: blur(8px);
+          border: 1px solid var(--w15);
+          border-radius: var(--radius-sm);
+          padding: 10px 14px;
+          text-align: center;
+          min-width: 54px;
+        }
+
+        .cal-card-badge {
+          position: absolute;
+          top: 14px; right: 14px;
+          background: var(--gold);
+          color: var(--night);
+          font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+          padding: 5px 11px; border-radius: 999px;
+        }
+
+        .cal-card-body {
+          padding: 20px 20px 22px;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
+
+        .cal-card-title {
+          font-size: clamp(20px, 3vw, 26px);
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: -0.3px;
+          line-height: 1.05;
+          margin-bottom: 8px;
+        }
+
+        .cal-card-artist {
+          font-size: 13px;
+          color: var(--w60);
+          line-height: 1.5;
         }
       `}</style>
     </div>

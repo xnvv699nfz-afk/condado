@@ -31,7 +31,7 @@ function Sala({ onNav }) {
             display: 'grid', gridTemplateColumns: '1fr', gap: 28,
           }} className="sala-hero">
             <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '4/3', background: 'var(--night-3)' }}>
-              <img src={GALLERY[0]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src='assets/images/sala-condado-02.jpg' alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(8,5,9,0.7) 0%, transparent 50%)' }}></div>
               <div style={{ position: 'absolute', bottom: 24, left: 24, right: 24 }}>
                 <p className="serif" style={{ fontSize: 'clamp(40px, 6vw, 80px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.9, letterSpacing: -1 }}>
