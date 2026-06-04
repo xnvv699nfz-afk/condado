@@ -1170,12 +1170,12 @@ const ARTISTS = [
 ];
 
 const GALLERY = [
-  'https://images.unsplash.com/photo-1571266028243-d220ff95ca75?w=900&q=80',
-  'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&q=80',
-  'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&q=80',
-  'https://images.unsplash.com/photo-1574169208507-84376144848b?w=900&q=80',
-  'https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=900&q=80',
-  'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&q=80',
+  'assets/sala/sala-condado-01.jpg',
+  'assets/sala/sala-condado-02.jpg',
+  'assets/sala/sala-condado-03.jpg',
+  'assets/sala/sala-condado-04.jpg',
+  'assets/sala/sala-condado-05.jpg',
+  'assets/sala/sala-condado-06.jpg',
 ];
 
 function EventCard({ event, onNav, width }) {
@@ -1639,7 +1639,7 @@ Object.assign(window, { Home });
 // === page-calendario-vip.jsx ===
 
 // Calendario, Mesas VIP pages
-function PageHeader({ eyebrow, title, subtitle }) {
+function PageHeader({ eyebrow, title, subtitle, cta }) {
   return (
     <header style={{ padding: '140px 24px 60px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
       <div style={{
@@ -1656,6 +1656,7 @@ function PageHeader({ eyebrow, title, subtitle }) {
           marginTop: 12, marginBottom: subtitle ? 18 : 0,
         }} dangerouslySetInnerHTML={{ __html: title }}/>
         {subtitle && <p style={{ fontSize: 15, color: 'var(--w60)', maxWidth: 620, margin: '0 auto', lineHeight: 1.65 }}>{subtitle}</p>}
+        {cta && <div style={{ marginTop: 28 }}>{cta}</div>}
       </div>
     </header>
   );
@@ -1914,7 +1915,7 @@ const VIP_TABLES = [
     price: '€450',
     pax: '6 personas',
     location: 'Mesas en la pista',
-    img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&q=80',
+    img: 'assets/sala/sala-condado-01.jpg',
     features: ['Acceso VIP para 6 personas', '1 botella incluida', '12 refrescos incluidos', 'Mesa reservada', 'Acceso prioritario sin cola'],
     tag: 'La más reservada',
   },
@@ -1924,7 +1925,7 @@ const VIP_TABLES = [
     price: '€350',
     pax: '6 personas',
     location: 'Palco bajo · sala principal',
-    img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&q=80',
+    img: 'assets/sala/sala-condado-02.jpg',
     features: ['Acceso VIP para 6 personas', '1 botella incluida', '12 refrescos incluidos', 'Mesa reservada', 'Zona elevada con vista a pista'],
   },
   {
@@ -1933,7 +1934,7 @@ const VIP_TABLES = [
     price: '€250',
     pax: '6 personas',
     location: 'Palco alto · sala principal',
-    img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&q=80',
+    img: 'assets/sala/sala-condado-03.jpg',
     features: ['Acceso VIP para 6 personas', '1 botella incluida', '12 refrescos incluidos', 'Mesa reservada', 'Vista panorámica desde palco superior'],
   },
 ];
@@ -2127,7 +2128,7 @@ function Sala({ onNav }) {
             display: 'grid', gridTemplateColumns: '1fr', gap: 28,
           }} className="sala-hero">
             <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '4/3', background: 'var(--night-3)' }}>
-              <img src='assets/images/sala-condado-02.jpg' alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src='assets/sala/sala-condado-02.jpg' alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(8,5,9,0.7) 0%, transparent 50%)' }}></div>
               <div style={{ position: 'absolute', bottom: 24, left: 24, right: 24 }}>
                 <p className="serif" style={{ fontSize: 'clamp(40px, 6vw, 80px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.9, letterSpacing: -1 }}>
@@ -2213,7 +2214,7 @@ function Sala({ onNav }) {
             borderRadius: 'var(--radius-lg)',
             textAlign: 'center',
           }}>
-            <span className="eyebrow">+200 artistas en 15 años</span>
+            <span className="eyebrow">+200 artistas en 11 años</span>
             <h3 className="serif" style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 16 }}>
               ¿Quién ha pasado por <em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>Condado</em>?
             </h3>
@@ -2331,6 +2332,7 @@ function EventosPrivados({ onNav }) {
         eyebrow="Eventos Privados"
         title='Eventos y alquiler<br/><em style="font-style:normal;font-weight:300;color:var(--gold)">de espacios</em>'
         subtitle="Condado se ha consolidado como una de las salas más atractivas y mejor equipadas de España, posicionándose actualmente en el TOP 94 de las mejores salas del mundo."
+        cta={<button className="btn btn-gold" onClick={() => onNav('/contacto')}>Solicita información</button>}
       />
 
       <section className="container">
@@ -2506,137 +2508,66 @@ function Contacto({ onNav }) {
       <PageHeader
         eyebrow="Estamos en Dénia"
         title='<em style="font-style:normal;font-weight:300;color:var(--gold)">Contacto</em>'
-        subtitle="Reservas, prensa, colaboraciones, dudas. Elige el canal que prefieras."
       />
 
-      <div style={{ padding: '0 24px 100px' }}>
+      <section className="container" style={{ position: 'relative', paddingTop: 0 }}>
         <div className="container-wide" style={{ margin: '0 auto' }}>
 
-          {/* Channels grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14, marginBottom: 60 }}>
+          {/* Contact channels */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, marginBottom: 64 }}>
             {[
-              { eye: 'Taquilla', title: 'Entradas y reservas', email: 'taquilla@condadoclub.es', tel: '601 602 030', icon: '✦' },
-              { eye: 'Eventos privados', title: 'Cumpleaños · empresas', email: 'eventos@condadoclub.es', tel: '965 270 027', icon: '◈' },
-              { eye: 'Prensa & Marketing', title: 'Medios y colaboraciones', email: 'prensa@condadoclub.es', tel: '', icon: '◉' },
-              { eye: 'Trabaja con nosotros', title: 'RRHH y empleo', email: 'rrhh@condadoclub.es', tel: '', icon: '◆' },
+              { eye: 'Entradas y reservas', email: 'taquilla@condadoclub.es', tel: '601 602 030 · 965 270 027' },
+              { eye: 'Trabaja con nosotros', email: 'rrhh@condadoclub.es', tel: null },
             ].map((c, i) => (
-              <div key={i} style={{
-                background: 'var(--night-2)', border: '1px solid var(--w08)',
-                borderRadius: 'var(--radius-md)', padding: 26,
-                transition: 'all 300ms ease',
-              }} className="contact-card">
-                <div style={{ fontSize: 22, color: 'var(--gold)', marginBottom: 14 }}>{c.icon}</div>
+              <div key={i} className="ctc-card">
                 <span className="eyebrow" style={{ fontSize: 9.5 }}>{c.eye}</span>
-                <p className="serif" style={{ fontSize: 19, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.3, marginTop: 8, marginBottom: 14 }}>{c.title}</p>
-                <a href={`mailto:${c.email}`} style={{ display: 'block', fontSize: 13, color: 'var(--w60)', marginBottom: 4 }}>{c.email}</a>
-                {c.tel && <a href={`tel:${c.tel.replace(/\s/g, '')}`} style={{ display: 'block', fontSize: 13, color: 'var(--w60)' }}>{c.tel}</a>}
+                <a href={`mailto:${c.email}`} style={{ display: 'block', fontSize: 13.5, color: 'var(--w80)', marginTop: 10, marginBottom: 3 }}>{c.email}</a>
+                {c.tel && <a href={`tel:${c.tel.replace(/\s/g, '')}`} style={{ display: 'block', fontSize: 13.5, color: 'var(--w60)' }}>{c.tel}</a>}
               </div>
             ))}
           </div>
 
-          <div className="contact-split">
-            {/* Map placeholder + address */}
-            <div>
-              <span className="eyebrow">Dónde estamos</span>
-              <h3 className="serif" style={{ fontSize: 30, fontWeight: 800, textTransform: 'uppercase', letterSpacing: -0.3, marginTop: 10, marginBottom: 18 }}>
-                Dénia, Alicante.<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>Costa Blanca</em>.
-              </h3>
-
-              <div style={{
-                position: 'relative',
-                aspectRatio: '4/3',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                border: '1px solid var(--w08)',
-                background: 'linear-gradient(135deg, #0F0B14 0%, #160F1C 50%, #0F0B14 100%)',
-                marginBottom: 20,
-              }}>
-                {/* Faux map */}
-                <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-                  <defs>
-                    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-                      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#grid)"/>
-                  <path d="M 0 180 Q 100 160 180 175 T 400 165 L 400 300 L 0 300 Z" fill="rgba(232,169,74,0.04)"/>
-                  <path d="M 0 180 Q 100 160 180 175 T 400 165" stroke="rgba(232,169,74,0.25)" strokeWidth="1" fill="none"/>
-                  <path d="M 20 100 L 120 90 L 200 110 L 280 95 L 380 105" stroke="rgba(255,255,255,0.08)" strokeWidth="1" fill="none"/>
-                  <path d="M 60 50 L 120 70 L 180 60 L 220 80 L 300 70" stroke="rgba(255,255,255,0.06)" strokeWidth="1" fill="none"/>
-                  <circle cx="210" cy="140" r="6" fill="var(--gold)"/>
-                  <circle cx="210" cy="140" r="14" fill="none" stroke="var(--gold)" strokeWidth="1" opacity="0.5">
-                    <animate attributeName="r" from="6" to="26" dur="2s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" from="0.7" to="0" dur="2s" repeatCount="indefinite"/>
-                  </circle>
-                  <text x="220" y="138" fill="white" fontSize="9" fontFamily="'Barlow', sans-serif" fontWeight="700" letterSpacing="2">CONDADO CLUB</text>
-                  <text x="220" y="150" fill="rgba(255,255,255,0.5)" fontSize="7" fontFamily="Barlow" letterSpacing="1">DÉNIA</text>
-                  <text x="20" y="195" fill="rgba(232,169,74,0.5)" fontSize="7" fontFamily="Barlow" letterSpacing="1.5">MEDITERRÁNEO</text>
-                  <text x="290" y="55" fill="rgba(255,255,255,0.25)" fontSize="7" fontFamily="Barlow" letterSpacing="1.5">MONTGÓ</text>
-                </svg>
-                <a href="https://maps.google.com/?q=Denia+Alicante" target="_blank" rel="noreferrer" className="btn btn-gold btn-sm" style={{ position: 'absolute', bottom: 16, right: 16 }}>
-                  Abrir en Maps →
-                </a>
+          {/* Address info row */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 28 }}>
+            {[
+              ['Dirección', 'Calle Marqués de Campo, 42\n03700 Dénia (Alicante)'],
+              ['Cómo llegar', 'AP-7 salida 62 · 1h desde Valencia · 1h desde Alicante'],
+              ['Parking', 'Parking público a 2 min · gratis viernes y sábados'],
+              ['Horario', 'Vie–Sáb 23:30–06:00\nEventos especiales otros días'],
+            ].map(([k, v], i) => (
+              <div key={i}>
+                <p className="micro" style={{ color: 'var(--gold)', marginBottom: 6 }}>{k}</p>
+                <p style={{ fontSize: 13.5, color: 'var(--w60)', lineHeight: 1.7, whiteSpace: 'pre-line' }}>{v}</p>
               </div>
-
-              <div style={{ display: 'grid', gap: 16 }}>
-                {[
-                  ['Dirección', 'Calle Marqués de Campo, 42 · 03700 Dénia (Alicante)'],
-                  ['Cómo llegar', 'AP-7 salida 62 · 1h desde Valencia · 1h desde Alicante'],
-                  ['Parking', 'Parking público a 2 min · gratis viernes y sábados'],
-                  ['Horario', 'Vie-Sáb 23:30–06:00 · eventos especiales otros días'],
-                ].map(([k, v], i) => (
-                  <div key={i}>
-                    <p className="micro" style={{ color: 'var(--gold)', marginBottom: 4 }}>{k}</p>
-                    <p style={{ fontSize: 13.5, color: 'var(--w60)', lineHeight: 1.6 }}>{v}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Form */}
-            <div style={{
-              background: 'var(--night-2)', border: '1px solid var(--w08)',
-              borderRadius: 'var(--radius-lg)', padding: '32px 24px',
-            }} className="contact-form">
-              <span className="eyebrow">Formulario rápido</span>
-              <h3 className="serif" style={{ fontSize: 28, fontWeight: 800, textTransform: 'uppercase', letterSpacing: -0.3, marginTop: 10, marginBottom: 22 }}>
-                Escríbenos.
-              </h3>
-              <form onSubmit={(e) => { e.preventDefault(); alert('Mensaje enviado. Te respondemos pronto.'); }}>
-                <div className="field"><label>Nombre</label><input required placeholder="Tu nombre" /></div>
-                <div className="field"><label>Email</label><input required type="email" placeholder="tu@email.com" /></div>
-                <div className="field">
-                  <label>Asunto</label>
-                  <select required>
-                    <option>Reservas y entradas</option>
-                    <option>Mesas VIP</option>
-                    <option>Eventos privados</option>
-                    <option>Prensa / colaboraciones</option>
-                    <option>Objetos perdidos</option>
-                    <option>Otro</option>
-                  </select>
-                </div>
-                <div className="field"><label>Mensaje</label><textarea required placeholder="Cuéntanos en qué te podemos ayudar..."></textarea></div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, margin: '4px 0 22px', fontSize: 12, color: 'var(--w60)', lineHeight: 1.5 }}>
-                  <input type="checkbox" required style={{ marginTop: 3, accentColor: 'var(--gold)' }} />
-                  <span>Acepto la <a href="#" style={{ color: 'var(--gold)', textDecoration: 'underline' }}>política de privacidad</a>.</span>
-                </div>
-                <button type="submit" className="btn btn-gold" style={{ width: '100%' }}>Enviar mensaje →</button>
-              </form>
-            </div>
+            ))}
           </div>
+
+          {/* Google Maps */}
+          <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--w08)', marginBottom: 40, marginTop: 48 }}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3107.6504331560277!2d0.10693701132646584!3d38.84046587161844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x129e1b21cc28f8b1%3A0x654f3401c049300f!2sCondado%20Club!5e0!3m2!1ses!2ses!4v1780587506504!5m2!1ses!2ses"
+              width="100%"
+              height="460"
+              style={{ border: 0, display: 'block' }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Condado Club - Dénia, Alicante"
+            ></iframe>
+          </div>
+
         </div>
-      </div>
+      </section>
 
       <style>{`
-        .contact-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
-        .contact-split {
-          display: grid; grid-template-columns: 1fr; gap: 28px;
+        .ctc-card {
+          background: var(--night-2);
+          border: 1px solid var(--w08);
+          border-radius: var(--radius-md);
+          padding: 24px 22px;
+          transition: border-color 300ms ease;
         }
-        @media (min-width: 900px) {
-          .contact-split { grid-template-columns: 1fr 1fr; gap: 40px; }
-          .contact-form { padding: 40px 36px; }
-        }
+        .ctc-card:hover { border-color: var(--gold-border); }
       `}</style>
     </div>
   );
