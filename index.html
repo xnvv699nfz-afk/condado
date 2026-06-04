@@ -956,7 +956,7 @@ Object.assign(window, {
 const { useState, useEffect, useRef } = React;
 
 function Logo({ size = 'md' }) {
-  const h = size === 'sm' ? 32 : 40;
+  const h = size === 'sm' ? 42 : 40;
   return (
     <a href="#/" onClick={(e) => { e.preventDefault(); window.location.hash = '/'; }} className="logo">
       <img src="assets/logos/logo-condado.png" alt="Condado Club" style={{ height: h, width: 'auto', display: 'block' }} />
@@ -1012,7 +1012,6 @@ function Nav({ route, onNav }) {
             </li>
           ))}
         </ul>
-        <a href="#/tickets" onClick={go('/tickets')} className="btn btn-gold nav-cta">COMPRAR TICKETS Y VIP</a>
         <button className={`burger${open ? ' open' : ''}`} onClick={toggle} aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -1029,9 +1028,6 @@ function Nav({ route, onNav }) {
             {item.name}
           </a>
         ))}
-        <a href="#/tickets" onClick={go('/tickets')} className="btn btn-gold" style={{ marginTop: 18, padding: '16px 36px' }}>
-          Comprar Tickets
-        </a>
         <div style={{ marginTop: 24, display: 'flex', gap: 14 }}>
           <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="social-icon"><InstagramIcon /></a>
           <a href="https://facebook.com"  target="_blank" rel="noreferrer" aria-label="Facebook" className="social-icon"><FacebookIcon /></a>
@@ -1057,6 +1053,21 @@ function Footer({ onNav }) {
   return (
     <footer className="footer">
       <div className="container-wide" style={{ margin: '0 auto' }}>
+
+        {/* Certificados de calidad */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: 32, paddingBottom: 48, marginBottom: 48, borderBottom: '1px solid var(--w08)' }}>
+          <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--w40)', flexBasis: '100%', textAlign: 'center' }}>Certificados de calidad</span>
+          {[
+            { src: 'assets/logos/logo-triple-excellence.png', alt: 'Triple Excellence' },
+            { src: 'assets/logos/logo-inaq.png',              alt: 'INAQ' },
+            { src: 'assets/logos/logo-inqs.png',              alt: 'INQS' },
+            { src: 'assets/logos/logo-ins.jpg',               alt: 'INS' },
+          ].map((l) => (
+            <img key={l.alt} src={l.src} alt={l.alt} style={{ height: 56, width: 'auto', objectFit: 'contain' }}
+            />
+          ))}
+        </div>
+
         <div className="footer-grid">
           <div>
             <Logo size="sm" />
@@ -1087,7 +1098,7 @@ function Footer({ onNav }) {
 
           <div>
             <p className="micro" style={{ color: 'var(--gold)', marginBottom: 14 }}>Redes sociales</p>
-            <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
+            <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
               <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon" aria-label="Instagram"><InstagramIcon /></a>
               <a href="https://facebook.com"  target="_blank" rel="noreferrer" className="social-icon" aria-label="Facebook"><FacebookIcon /></a>
               <a href="https://tiktok.com"    target="_blank" rel="noreferrer" className="social-icon" aria-label="TikTok"><TikTokIcon /></a>
@@ -1126,27 +1137,36 @@ const linkStyle = { fontSize: 13, color: 'var(--w60)', transition: 'color 200ms 
 
 // Shared data ----------------------------------------------------------------
 const EVENTS = [
-  { id: 1, name: 'Old School Reggaeton', date: 'Jue 30 Abr · 23:00', day: '30', month: 'Abr', monthKey: 'abr', dayName: 'JUE', support: 'Chover · Piera', genre: 'Reggaeton · Urban', image: 'assets/events/old-school.jpg', badge: 'Próxima', sold: 'Quedan 89' },
-  { id: 2, name: 'Fever',                 date: 'Sáb 16 May · 23:00', day: '16', month: 'May', monthKey: 'may', dayName: 'SÁB', support: 'Taron · Angel Belmonte', genre: 'Electronic · House', image: 'assets/events/fever.jpg', sold: 'Quedan 234' },
-  { id: 3, name: 'Privé',                 date: 'Sáb 13 Jun · 23:00', day: '13', month: 'Jun', monthKey: 'jun', dayName: 'SÁB', support: 'Mitch van Staveren · Suel', genre: 'Urban · House', image: 'assets/events/prive.jpg', sold: 'Quedan 412' },
-  { id: 4, name: 'Friday Mode > On',      date: 'Vie 20 Jun · 23:00', day: '20', month: 'Jun', monthKey: 'jun', dayName: 'VIE', support: 'Residentes · Denia', genre: 'Urban · Reggaeton', image: 'assets/events/friday-mode.jpg', sold: 'Quedan 156' },
-  { id: 5, name: 'Yan Block',             date: 'Mié 22 Jul · 23:00', day: '22', month: 'Jul', monthKey: 'jul', dayName: 'MIÉ', support: 'En concierto · Denia', genre: 'Urban · Trap', image: 'assets/events/yan-block.jpg', badge: 'En venta', sold: 'Quedan 67' },
-  { id: 6, name: 'Interstellar',          date: 'Sáb 08 Ago · 23:00', day: '08', month: 'Ago', monthKey: 'ago', dayName: 'SÁB', support: '10 Years of Music · Condado', genre: 'Todos los géneros', image: 'assets/events/interstellar.jpg', badge: 'Próximamente' },
+  { id: 1, name: 'Jose Nogales', date: 'Vie 5 Jun · 23:30', day: '05', month: 'Jun', monthKey: 'jun', dayName: 'VIE', support: 'Miguel Piera', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/a3fa8914-4da4-40f5-e57c-75a719e9ce00/w=1350' },
+  { id: 2, name: 'Privé',                 date: 'Sáb 6 Jun · 23:45', day: '06', month: 'Jun', monthKey: 'jun', dayName: 'SÁB', support: 'Mitch van Staveren · Suel', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/7498bd00-c307-48c8-bacc-fe6ad97d2e00/w=1350' },
+  { id: 4, name: 'Viernes Condado',      date: 'Vie 12 Jun · 23:30', day: '12', month: 'Jun', monthKey: 'jun', dayName: 'VIE', support: 'Residentes', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/8242ced8-cb8e-48f7-ca9b-500f80559400/w=1350'},
+  { id: 5, name: 'Fever',             date: 'Sáb 13 Jun · 23:45', day: '13', month: 'Jun', monthKey: 'jun', dayName: 'SÁB', support: 'Residentes', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/85e36e1c-969a-4e88-3b25-af059887fb00/w=1350'},
+  { id: 6, name: 'Project XXL',          date: 'Vie 19 Jun · 23:30', day: '19', month: 'Jun', monthKey: 'jun', dayName: 'VIE', support: 'Angel Belmonte · ESEOESE · Miguel Piera', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/a0991d62-26d0-44fb-691e-416ebf8cfe00/w=1350' },
+  { id: 7, name: 'Fever',          date: 'Sáb 20 Jun · 23:45', day: '20', month: 'Jun', monthKey: 'jun', dayName: 'SÁB', support: 'Residentes', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/cb298749-4fcc-4b4a-1cbc-bb64a2b6ef00/w=1350' },
+  { id: 8, name: 'Old School Reggaeton',          date: 'Mar 23 Jun · 23:30', day: '23', month: 'Jun', monthKey: 'jun', dayName: 'SÁB', support: 'Residentes', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/d747abc8-1d5d-41ff-e8d2-6e8c81f8f400/w=1350' },
+  { id: 9, name: 'Bumbum',          date: 'Vie 26 Jun · 23:30', day: '26', month: 'Jun', monthKey: 'jun', dayName: 'VIE', support: 'bumbum', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/735dc955-bc72-4143-58c3-8b6af3a0e500/w=1350' },
+  { id: 10, name: 'Privé',                 date: 'Sáb 27 Jun · 23:45', day: '27', month: 'Jun', monthKey: 'jun', dayName: 'SÁB', support: 'Mitch van Staveren · Suel', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/7498bd00-c307-48c8-bacc-fe6ad97d2e00/w=1350' },
+  { id: 11, name: 'Summer Mode',                 date: 'Vie 3 Jul · 23:30', day: '03', month: 'Jul', monthKey: 'jul', dayName: 'VIE', support: 'Residentes', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/ef26d901-e558-4a4c-a648-574ce1157900/w=1350' },
+  { id: 12, name: 'Fiestas de Dénia',                 date: 'Sáb 4 Jul · 23:45', day: '04', month: 'Jul', monthKey: 'jul', dayName: 'SÁB', support: 'Mitch Van Staveren · Suel · Miguel Piera', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/99bc033f-c158-487d-4642-43b781bc2100/w=1350' },
+  { id: 13, name: 'Yan Block',                 date: 'Mié 22 Jul · 23:45', day: '22', month: 'Jul', monthKey: 'jul', dayName: 'MIÉ', support: 'Yan Block', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/d7d30b0f-deae-403b-e3aa-5b6e77de5e00/w=1350' },
+  { id: 14, name: 'Luar La L',                 date: 'Mié 29 Jul · 23:45', day: '29', month: 'Jul', monthKey: 'jul', dayName: 'MIÉ', support: 'Luar La L', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/6bef34a8-6db2-4c5b-63a2-c097ab6b9c00/w=1350' },
+  { id: 15, name: 'Shark Condado',                 date: 'Vie 7 Ago · 23:45', day: '07', month: 'Ago', monthKey: 'ago', dayName: 'VIE', support: 'Residentes', image: 'https://fourvenues.com/cdn-cgi/imagedelivery/kWuoTchaMsk7Xnc_FNem7A/79aafb2e-9ad4-4749-03b5-382113d69400/w=1350' },
+
 ];
 
 const ARTISTS = [
-  { name: 'Arcángel',      genre: 'Reggaeton · Trap',   img: 'assets/artists/luar-la-condado.jpg' },
-  { name: 'Bryant Myers',  genre: 'Trap · Hip-Hop Latino',   img: 'https://images.unsplash.com/photo-1571266028243-d220ff95ca75?w=600&q=80' },
-  { name: 'Hades 66',      genre: 'Trap · Drill',   img: 'https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=600&q=80' },
-  { name: 'JC Reyes',      genre: 'Trap · Urbano',    img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80' },
-  { name: 'Karol G',       genre: 'Reggaeton · Latin Pop',   img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80' },
-  { name: 'Luar La L',     genre: 'Trap · Drill',           img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80' },
-  { name: 'Mike Towers',   genre: 'Trap · Reggaeton',          img: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=600&q=80' },
-  { name: 'Ñengo Flow',    genre: 'Reggaetón · Latin Trap',   img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&q=80' },
-  { name: 'Roa',           genre: 'Urbano · Trap',          img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&sat=-100' },
-  { name: 'Saiko',              genre: 'Reggaeton · Trap',          img: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80' },
-  { name: 'Angel Belmonte',     genre: 'Electronic',     img: 'https://images.unsplash.com/photo-1571266028243-d220ff95ca75?w=600&q=80&hue=240' },
-  { name: 'Mitch van Staveren', genre: 'House · Tech',   img: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80&hue=120' },
+  { name: 'Arcángel',      genre: 'Reggaeton · Trap',   img: 'assets/artists/arcangel-condado.jpg' },
+  { name: 'Bryant Myers',  genre: 'Trap · Hip-Hop Latino',   img: 'assets/artists/bryant-myers-condado.jpg' },
+  { name: 'Hades 66',      genre: 'Trap · Drill',   img: 'assets/artists/hades-66-condado.jpg' },
+  { name: 'JC Reyes',      genre: 'Trap · Urbano',    img: 'assets/artists/jc-reyes-condado.jpg' },
+  { name: 'Karol G',       genre: 'Reggaeton · Latin Pop',   img: 'assets/artists/karol-g-condado.jpg' },
+  { name: 'Luar La L',     genre: 'Trap · Drill',           img: 'assets/artists/luar-la-l-condado.jpg' },
+  { name: 'Mike Towers',   genre: 'Trap · Reggaeton',          img: 'assets/artists/mike-towers-condado.jpg' },
+  { name: 'Ñengo Flow',    genre: 'Reggaeton · Latin Trap',   img: 'assets/artists/ñengo-flow-condado.jpg' },
+  { name: 'Roa',           genre: 'Urbano · Trap',          img: 'assets/artists/roa-condado.jpg' },
+  { name: 'Saiko',              genre: 'Reggaeton · Trap',          img: 'assets/artists/saiko-condado.jpg' },
+  { name: 'Angel Belmonte',     genre: 'Electronic',     img: 'assets/artists/angel-belmonte-condado.jpg' },
+  { name: 'Mitch van Staveren', genre: 'House · Tech',   img: 'assets/artists/mitch-van-staveren-condado.jpg' },
 ];
 
 const GALLERY = [
@@ -1163,7 +1183,6 @@ function EventCard({ event, onNav, width }) {
     <div className="event-card" style={{ width }}>
       <img src={event.image} alt={event.name} loading="lazy" />
       <div className="event-grad"></div>
-      {event.badge && <span className="event-badge">{event.badge}</span>}
       <div className="event-body">
         <p style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 4 }}>
           {event.date}
@@ -1175,7 +1194,7 @@ function EventCard({ event, onNav, width }) {
           {event.support}
         </p>
         <div style={{ display: 'flex', gap: 8 }}>
-          <button className="btn btn-gold btn-sm" style={{ flex: 1 }} onClick={() => onNav('/tickets')}>Tickets y VIP</button>
+          <button className="btn btn-gold btn-sm" style={{ flex: 1 }}>Tickets y VIP</button>
         </div>
       </div>
       <style>{`
@@ -1222,38 +1241,76 @@ function Home({ onNav }) {
   return (
     <div className="page-enter">
       {/* HERO */}
-      <section style={{ position: 'relative', minHeight: 'var(--hero-min)', display: 'flex', alignItems: 'flex-end', overflow: 'hidden' }}>
-        <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} src="uploads/video-hero-condado.mp4" />
+      <section style={{ position: 'relative', minHeight: 'var(--hero-min)', display: 'flex', alignItems: 'stretch', overflow: 'hidden' }}>
+        <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} src="assets/video/video-hero-97-baja.mp4" />
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, rgba(8,5,9,0.4) 0%, rgba(8,5,9,0.4) 45%, rgba(8,5,9,0.88) 100%)',
         }}></div>
-        <div style={{ position: 'relative', zIndex: 2, padding: 'calc(60px * var(--pad-scale)) 24px calc(60px * var(--pad-scale))', width: '100%', maxWidth: 1440, margin: '0 auto' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 10,
-            background: 'var(--gold-dim)', border: '1px solid var(--gold-border)',
-            padding: '6px 14px', borderRadius: 999, marginBottom: 22,
-            fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)',
-          }}>
-            <strong>TOP #94</strong>Mejores clubs del mundo 2025
+        <div className="hero-inner">
+          <div className="hero-rank">
+            <img src="assets/logos/logo-top-100.png" alt="World's 100 Best Clubs" className="hero-rank-logo" style={{ height: 38, width: 'auto', display: 'block', flexShrink: 0 }} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2, lineHeight: 1 }}>
+              <span className="serif" style={{ fontSize: 22, fontWeight: 800, color: 'var(--gold)', lineHeight: 0.9, letterSpacing: -0.5 }}>
+                TOP <span style={{ color: '#fff' }}>#94</span>
+              </span>
+              <span style={{ fontSize: 9, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--w60)' }}>Mejores clubs del mundo</span>
+            </div>
           </div>
-          <h1 className="serif" style={{
-            fontSize: 'calc(clamp(54px, 9vw, 120px) * var(--type-scale))',
-            textTransform: 'uppercase',
-            lineHeight: 0.9,
-            marginBottom: 14,
-          }}>
-            Donde el sol<br/>cae y <em style={{ color: 'var(--gold)' }}>empieza</em><br/>la noche.
+          <h1 className="serif hero-title">
+            CONDADO CLUB<br/><em style={{ color: 'var(--gold)' }}></em>
           </h1>
-          <p style={{ fontSize: 14, letterSpacing: 4, textTransform: 'uppercase', color: 'var(--white)', marginBottom: 32 }}>
-            Condado Club 📍 Dénia, Alicante
+          <p className="hero-subtitle" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style={{ opacity: 0.7, flexShrink: 0 }}>
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            Dénia, Alicante
           </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <div className="hero-ctas">
             <a href="#/calendario" onClick={(e) => { e.preventDefault(); onNav('/calendario'); }} className="btn btn-gold">Ver próximos eventos →</a>
             <a href="#/mesas-vip" onClick={(e) => { e.preventDefault(); onNav('/mesas-vip'); }} className="btn btn-ghost">COMPRAR TICKETS Y VIP</a>
           </div>
         </div>
       </section>
+      <style>{`
+        .hero-inner {
+          position: relative; z-index: 2;
+          width: 100%; max-width: 1440px; margin: 0 auto;
+          padding: 100px 24px 48px;
+          display: flex; flex-direction: column;
+          align-items: flex-start; text-align: left; justify-content: flex-end;
+        }
+        .hero-rank {
+          display: inline-flex; align-items: center; gap: 10px;
+          background: rgba(8,5,9,0.4); border: 1px solid var(--gold-border);
+          backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+          padding: 8px 14px 8px 10px; border-radius: 10px;
+          margin-bottom: 28px;
+        }
+        .hero-title {
+          font-size: clamp(48px, 11vw, 120px);
+          text-transform: uppercase; line-height: 0.9;
+          margin-bottom: 16px;
+        }
+        .hero-subtitle {
+          font-size: 13px; letter-spacing: 4px;
+          text-transform: uppercase; color: var(--white);
+          margin-bottom: 0;
+        }
+        .hero-ctas {
+          display: flex; flex-direction: column; gap: 12px; width: 100%;
+          margin-top: 28px;
+        }
+        .hero-ctas .btn { width: 100%; justify-content: center; }
+        @media (min-width: 640px) {
+          .hero-inner { padding: 80px 48px; justify-content: center; }
+          .hero-ctas { position: static; flex-direction: row; width: auto; margin-top: 32px; }
+          .hero-ctas .btn { width: auto; }
+        }
+        @media (min-width: 1024px) {
+          .hero-inner { padding: 80px 64px; }
+        }
+      `}</style>
 
       {/* ARTIST TICKER */}
       <div style={{ background: 'var(--night-2)', borderTop: '1px solid var(--w08)', borderBottom: '1px solid var(--w08)', overflow: 'hidden', padding: '14px 0' }}>
@@ -1295,11 +1352,12 @@ function Home({ onNav }) {
       </div>
 
       {/* PRÓXIMOS EVENTOS — teaser */}
-      <section className="container">
+      <section className="container" style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, var(--gold-border), transparent)' }}></div>
         <div className="container-wide" style={{ margin: '0 auto' }}>
           <div className="section-head">
             <div>
-              <span className="eyebrow">Agenda</span>
+              <span className="eyebrow">Calendario</span>
               <h2 style={{ marginTop: 10 }}>Próximos <em>eventos</em></h2>
             </div>
           </div>
@@ -1353,17 +1411,18 @@ function Home({ onNav }) {
             Cuando el atardecer tiñe el mar de naranja y el Montgó se convierte en silueta, Condado despierta. El mayor show de la Costa Blanca empieza donde otros terminan.
           </p>
           <a href="#/sala" onClick={(e) => { e.preventDefault(); onNav('/sala'); }} className="btn btn-gold">
-            Descubrir la sala
+            Descubre la sala
           </a>
         </div>
       </div>
 
       {/* ARTISTAS — muro */}
-      <section className="container">
+      <section className="container" style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, var(--gold-border), transparent)' }}></div>
         <div className="container-wide" style={{ margin: '0 auto' }}>
           <div className="section-head">
             <div>
-              <span className="eyebrow">The Show of Artists · +200 nombres en 15 años</span>
+              <span className="eyebrow">The Show of Artists</span>
               <h2 style={{ marginTop: 10 }}><em>Artistas</em> que han<br/>pasado por Condado.</h2>
             </div>
           </div>
@@ -1401,12 +1460,8 @@ function Home({ onNav }) {
             border-radius: var(--radius-md);
             aspect-ratio: 4/5;
             background: var(--night-2);
-            cursor: pointer;
-            transition: transform 350ms ease;
           }
-          .home-artist-card:hover { transform: translateY(-6px); }
-          .home-artist-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
-          .home-artist-card:hover img { transform: scale(1.06); }
+          .home-artist-card img { width: 100%; height: 100%; object-fit: cover; }
           .home-artist-grad {
             position: absolute; inset: 0;
             background: linear-gradient(to top, rgba(8,5,9,0.97) 0%, rgba(8,5,9,0.4) 55%, transparent 100%);
@@ -1416,7 +1471,8 @@ function Home({ onNav }) {
       </section>
 
       {/* SALA TEASER (links to /sala) */}
-      <section className="container" style={{ background: 'var(--night-2)' }}>
+      <section className="container" style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, var(--gold-border), transparent)' }}></div>
         <div className="container-wide" style={{ margin: '0 auto', textAlign: 'center' }}>
           <span className="eyebrow">Lo que nos hace distintos</span>
           <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 40 }}>
@@ -1425,134 +1481,123 @@ function Home({ onNav }) {
 
           <div className="home-gallery" style={{ marginBottom: 40 }}>
             <div className="hg-item hg-a">
-              <img src="assets/sala/sala-condado-04.jpg" alt="Interstellar" loading="lazy" />
+              <img src="assets/sala/sala-condado-04.jpg" alt="Sala Condado" loading="lazy" />
             </div>
             <div className="hg-item hg-b">
               <img src="assets/sala/zona-vip-escenario.jpg" alt="Zona VIP" loading="lazy" />
             </div>
             <div className="hg-item hg-c">
-              <img src="assets/sala/sala-condado-06.jpg" alt="Fever" loading="lazy" />
+              <img src="assets/sala/sala-condado-06.jpg" alt="Sala Condado" loading="lazy" />
             </div>
             <div className="hg-item hg-d">
-              <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} src="uploads/video-hero-condado.mp4" />
+              <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} src="assets/video/video-hero-97-baja.mp4" />
             </div>
             <div className="hg-item hg-e">
-              <img src="assets/sala/sala-condado-03.jpg" alt="Privé" loading="lazy" />
+              <img src="assets/sala/sala-condado-03.jpg" alt="Sala Condado" loading="lazy" />
             </div>
             <div className="hg-item hg-f">
               <img src="assets/sala/sala-condado-05.jpg" alt="Sala Condado" loading="lazy" />
             </div>
+            <div className="hg-item hg-g">
+              <img src="assets/sala/sala-condado-08.jpg" alt="Sala Condado" loading="lazy" />
+            </div>
+            <div className="hg-item hg-h">
+              <img src="assets/sala/sala-condado-01.jpg" alt="Sala Condado" loading="lazy" />
+            </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, textAlign: 'left' }}>
-            {[
-              { icon: '✦', title: 'Producción artística', desc: 'Shows en vivo, performers y escenografías diseñadas para impactar.' },
-              { icon: '◈', title: 'Efectos especiales', desc: 'Llamas, CO₂, confeti y pirotecnia. Tecnología de primer nivel.' },
-              { icon: '◉', title: 'Sonido L-Acoustics', desc: 'Sistema calibrado para que cada frecuencia se sienta en el cuerpo.' },
-            ].map((item, i) => (
-              <div key={i} style={{
-                background: 'var(--night-3)', border: '1px solid var(--w08)',
-                borderRadius: 'var(--radius-md)', padding: 28,
-                transition: 'all 300ms ease',
-              }}>
-                <div style={{ fontSize: 24, color: 'var(--gold)', marginBottom: 16 }}>{item.icon}</div>
-                <p className="serif" style={{ fontSize: 19, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.3, marginBottom: 10 }}>{item.title}</p>
-                <p style={{ fontSize: 13, color: 'var(--w40)', lineHeight: 1.7 }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
           <div style={{ marginTop: 40 }}>
-            <a href="#/sala" onClick={(e) => { e.preventDefault(); onNav('/sala'); }} className="btn btn-ghost">Conocer la sala →</a>
+            <a href="#/sala" onClick={(e) => { e.preventDefault(); onNav('/sala'); }} className="btn btn-ghost">Conoce la sala</a>
           </div>
         </div>
         <style>{`
           .home-gallery {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 300px 240px 260px;
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
           }
-          @media (min-width: 600px) { .home-gallery { gap: 12px; } }
-          @media (min-width: 1200px) { .home-gallery { gap: 14px; grid-template-rows: 340px 260px 300px; } }
+          @media (min-width: 600px)  { .home-gallery { gap: 12px; } }
+          @media (min-width: 1200px) { .home-gallery { gap: 14px; } }
           .hg-item {
-            overflow: hidden;
-            background: var(--night-3);
-            position: relative;
-            border-radius: var(--radius-md);
+            overflow: hidden; background: var(--night-3);
+            position: relative; border-radius: var(--radius-md);
+            min-height: 0;
           }
-          .hg-item img {
+          .hg-item img, .hg-item video {
             width: 100%; height: 100%;
             object-fit: cover; display: block;
             transition: transform 600ms ease;
           }
           .hg-item:hover img { transform: scale(1.04); }
+
+          /* Desktop: 3 cols, filas auto por aspect-ratio */
           .hg-a { grid-column: 1; grid-row: 1 / 3; }
-          .hg-b { grid-column: 2; grid-row: 1; }
-          .hg-c { grid-column: 3; grid-row: 1; }
-          .hg-d { grid-column: 2; grid-row: 2 / 4; }
-          .hg-e { grid-column: 3; grid-row: 2 / 4; }
-          .hg-f { grid-column: 1; grid-row: 3; }
+          .hg-b { grid-column: 2; grid-row: 1; aspect-ratio: 4/3; }
+          .hg-c { grid-column: 3; grid-row: 1; aspect-ratio: 4/3; }
+          .hg-d { grid-column: 2 / 4; grid-row: 2; aspect-ratio: 16/9; }
+          .hg-e { grid-column: 1; grid-row: 3; aspect-ratio: 4/3; }
+          .hg-f { grid-column: 2; grid-row: 3; aspect-ratio: 4/3; }
+          .hg-g { grid-column: 3; grid-row: 3 / 5; }
+          .hg-h { grid-column: 1 / 3; grid-row: 4; aspect-ratio: 16/7; }
+
+          /* Móvil: 2 cols */
           @media (max-width: 700px) {
-            .home-gallery {
-              grid-template-columns: 1fr 1fr;
-              grid-template-rows: 200px 200px 200px;
-            }
+            .home-gallery { grid-template-columns: repeat(2, 1fr); }
             .hg-a { grid-column: 1; grid-row: 1 / 3; }
-            .hg-b { grid-column: 2; grid-row: 1; }
-            .hg-c { grid-column: 2; grid-row: 2; }
-            .hg-d { grid-column: 1 / 3; grid-row: 3; }
-            .hg-e { display: none; }
-            .hg-f { display: none; }
+            .hg-b { grid-column: 2; grid-row: 1; aspect-ratio: 4/5; }
+            .hg-c { grid-column: 2; grid-row: 2; aspect-ratio: 4/5; }
+            .hg-d { grid-column: 1 / 3; grid-row: 3; aspect-ratio: 16/9; }
+            .hg-e { grid-column: 1; grid-row: 4; aspect-ratio: 1/1; }
+            .hg-f { grid-column: 2; grid-row: 4; aspect-ratio: 1/1; }
+            .hg-g { grid-column: 1; grid-row: 5; aspect-ratio: 1/1; }
+            .hg-h { grid-column: 2; grid-row: 5; aspect-ratio: 1/1; }
           }
         `}</style>
       </section>
 
       {/* VIP teaser */}
-      <section className="vip-teaser">
-        <div style={{ position: 'relative', overflow: 'hidden' }}>
-          <img src="assets/sala/zona-vip-escenario.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,5,9,0.15) 0%, rgba(8,5,9,0.55) 100%)' }}></div>
-          <div style={{
-            position: 'absolute', top: 24, left: 24,
-            background: 'var(--gold-dim)', border: '1px solid var(--gold-border)',
-            padding: '6px 12px', borderRadius: 999,
-            fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)',
-          }}>Experiencia VIP</div>
-        </div>
-        <div style={{ padding: '56px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--night-3)' }}>
-          <span className="eyebrow">Reservas privadas</span>
-          <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 24 }}>
-            Tu zona.<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>Tus reglas.</em>
-          </h2>
-          <ul style={{ listStyle: 'none', margin: '12px 0 28px' }}>
-            {[
-              'Mesa reservada con acceso prioritario',
-              'Botella de bienvenida incluida',
-              'Atención personal toda la noche',
-              'Posición privilegiada frente al escenario',
-              'Acceso a zonas exclusivas de la sala',
-            ].map((f, i) => (
-              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--w05)', fontSize: 14, color: 'var(--w60)' }}>
-                <span style={{ width: 22, height: 22, flexShrink: 0, background: 'var(--gold-dim)', border: '1px solid var(--gold-border)', borderRadius: 6, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: 'var(--gold)' }}>✓</span>
-                {f}
-              </li>
-            ))}
-          </ul>
-          <a href="#/mesas-vip" onClick={(e) => { e.preventDefault(); onNav('/mesas-vip'); }} className="btn btn-gold" style={{ alignSelf: 'flex-start' }}>
-            Ver todas las zonas VIP →
-          </a>
+      <section className="container" style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, var(--gold-border), transparent)' }}></div>
+        <div className="container-wide" style={{ margin: '0 auto' }}>
+          <div className="vip-split">
+
+            <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '4/5', background: 'var(--night-3)' }}>
+              <img src="assets/sala/zona-vip-escenario.jpg" alt="Zona VIP" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', top: 16, left: 16, background: 'var(--gold-dim)', border: '1px solid var(--gold-border)', padding: '6px 12px', borderRadius: 999, fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)' }}>Experiencia VIP</div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <span className="eyebrow">Reservas privadas</span>
+              <h2 className="serif" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 24 }}>
+                ZONAS VIP.<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>EXCLUSIVAS.</em>
+              </h2>
+              <ul style={{ listStyle: 'none', margin: '0 0 28px' }}>
+                {[
+                  'Mesa reservada con acceso prioritario',
+                  'Botella de bienvenida incluida',
+                  'Atención personal toda la noche',
+                  'Posición privilegiada',
+                  'Acceso a zonas exclusivas de la sala',
+                ].map((f, i) => (
+                  <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--w08)', fontSize: 14, color: 'var(--w60)' }}>
+                    <span style={{ width: 22, height: 22, flexShrink: 0, background: 'var(--gold-dim)', border: '1px solid var(--gold-border)', borderRadius: 6, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: 'var(--gold)' }}>✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href="#/mesas-vip" onClick={(e) => { e.preventDefault(); onNav('/mesas-vip'); }} className="btn btn-gold" style={{ alignSelf: 'flex-start' }}>
+                Ver todas las zonas VIP
+              </a>
+            </div>
+
+          </div>
         </div>
         <style>{`
-          .vip-teaser {
-            display: grid;
-            grid-template-columns: 1fr;
-            background: var(--night-3);
+          .vip-split {
+            display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center;
           }
-          .vip-teaser > div:first-child { min-height: 340px; }
           @media (min-width: 768px) {
-            .vip-teaser { grid-template-columns: 1fr 1fr; }
-            .vip-teaser > div:first-child { min-height: 560px; }
-            .vip-teaser > div:last-child { padding: 80px 64px; }
+            .vip-split { grid-template-columns: 1fr 1fr; gap: 64px; }
           }
         `}</style>
       </section>
@@ -1578,11 +1623,10 @@ function Home({ onNav }) {
           Esta noche,<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>Condado.</em>
         </h2>
         <p style={{ position: 'relative', zIndex: 2, fontSize: 11, color: 'var(--w40)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 36 }}>
-          Quedan plazas para el próximo evento · Dénia, Alicante
+          Dénia, Alicante
         </p>
         <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-          <a href="#/tickets" onClick={(e) => { e.preventDefault(); onNav('/tickets'); }} className="btn btn-gold">Comprar tickets</a>
-          <a href="#/mesas-vip" onClick={(e) => { e.preventDefault(); onNav('/mesas-vip'); }} className="btn btn-ghost">Reservar VIP</a>
+          <a href="#/mesas-vip" onClick={(e) => { e.preventDefault(); onNav('/mesas-vip'); }} className="btn btn-ghost">TICKETS Y VIP</a>
         </div>
       </div>
     </div>
@@ -1689,19 +1733,18 @@ function Calendario({ onNav }) {
               : (
                 <div className="cc-grid">
                   {filtered.map(ev => (
-                    <article key={ev.id} className="cc-card">
+                    <div key={ev.id} className="cc-card-wrap">
                       <p className="cc-card-hdr">{ev.dayName} · {ev.day} {ev.month.toUpperCase()}</p>
-                      <div className="cc-card-img-wrap">
+                      <article className="cc-card">
                         <img src={ev.image} alt={ev.name} className="cc-card-img" />
-                        {ev.badge && <span className="cc-badge">{ev.badge}</span>}
-                      </div>
-                      <div className="cc-card-body">
-                        <p className="cc-card-date">{ev.dayName} {ev.day} {ev.month.toUpperCase()}</p>
-                        <h3 className="serif cc-card-title">{ev.name}</h3>
-                        <p className="cc-card-artist">{ev.support}</p>
-                        <button className="btn btn-gold cc-card-cta" onClick={() => onNav('/tickets')}>Tickets y VIP</button>
-                      </div>
-                    </article>
+                        <div className="cc-card-grad"></div>
+                        <div className="cc-card-body">
+                          <h3 className="serif cc-card-title">{ev.name}</h3>
+                          <p className="cc-card-artist">{ev.support}</p>
+                          <button className="btn btn-gold cc-card-cta">Tickets y VIP</button>
+                        </div>
+                      </article>
+                    </div>
                   ))}
                 </div>
               )
@@ -1722,7 +1765,7 @@ function Calendario({ onNav }) {
                         return (
                           <div key={i}
                                className={`cc-cal-cell${ev ? ' has-ev' : ''}${!day ? ' pad' : ''}`}
-                               onClick={ev ? () => onNav('/tickets') : undefined}>
+                               >
                             {day && <span className="cc-cal-num">{day}</span>}
                             {ev  && <img src={ev.image} alt={ev.name} className="cc-cal-img" />}
                             {ev  && (
@@ -1770,28 +1813,32 @@ function Calendario({ onNav }) {
         @media (min-width: 560px)  { .cc-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .cc-grid { grid-template-columns: repeat(5, 1fr); gap: 40px 20px; } }
 
-        .cc-card { display: flex; flex-direction: column; }
+        .cc-card-wrap { display: flex; flex-direction: column; }
         .cc-card-hdr {
           font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
           color: var(--w40); margin-bottom: 10px; font-weight: 500;
         }
-        .cc-card-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; border-radius: 3px; }
-        .cc-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
-        .cc-card:hover .cc-card-img { transform: scale(1.04); }
-        .cc-badge {
-          position: absolute; top: 10px; right: 10px;
-          background: var(--gold); color: var(--night);
-          font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-          padding: 4px 10px; border-radius: 999px;
+        .cc-card {
+          position: relative; aspect-ratio: 4/5.5;
+          border-radius: var(--radius-lg); overflow: hidden;
+          background: var(--night-2); cursor: pointer;
+          transition: transform 400ms ease, box-shadow 400ms ease;
         }
-        .cc-card-body { padding: 12px 0 0; }
-        .cc-card-date { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--w60); margin-bottom: 6px; }
+        .cc-card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(0,0,0,0.5); }
+        .cc-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+        .cc-card:hover .cc-card-img { transform: scale(1.05); }
+        .cc-card-grad {
+          position: absolute; inset: 0;
+          background: linear-gradient(to top, rgba(8,5,9,0.97) 0%, rgba(8,5,9,0.65) 38%, rgba(8,5,9,0.12) 65%, transparent 100%);
+        }
+        .cc-card-body { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px; z-index: 2; }
+        .cc-card-date { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
         .cc-card-title {
-          font-size: clamp(15px, 2vw, 19px); font-weight: 800;
-          text-transform: uppercase; letter-spacing: -0.2px; line-height: 1.05; margin-bottom: 5px;
+          font-size: 26px; font-weight: 800;
+          text-transform: uppercase; letter-spacing: -0.3px; line-height: 0.95; margin-bottom: 4px;
         }
-        .cc-card-artist { font-size: 12px; color: var(--w40); line-height: 1.4; }
-        .cc-card-cta { width: 100%; margin-top: 14px; font-size: 11px; }
+        .cc-card-artist { font-size: 11.5px; color: var(--w40); letter-spacing: 0.3px; margin-bottom: 14px; }
+        .cc-card-cta { width: 100%; font-size: 11px; }
 
         /* Calendar view */
         .cc-month { margin-bottom: 60px; }
@@ -1835,7 +1882,7 @@ function Calendario({ onNav }) {
         .cc-cal-evname {
           font-size: clamp(8px, 1.1vw, 12px); font-weight: 800;
           text-transform: uppercase; line-height: 1.1; color: var(--white);
-          font-family: var(--font-serif, 'Barlow Condensed', sans-serif);
+          font-family: var(--serif);
         }
         .cc-cal-evartist { font-size: clamp(7px, 0.85vw, 10px); color: var(--w60); margin-top: 2px; }
 
@@ -1930,7 +1977,7 @@ function MesasVIP({ onNav }) {
                     ))}
                   </ul>
                   <button onClick={() => onNav('/calendario')} className="btn btn-gold" style={{ width: '100%' }}>
-                    Entradas y VIP →
+                    Tickets y VIP
                   </button>
                 </div>
               </article>
@@ -2257,12 +2304,8 @@ function Artistas({ onNav }) {
           position: relative; overflow: hidden;
           border-radius: var(--radius-md);
           aspect-ratio: 3/4;
-          cursor: pointer;
-          transition: transform 350ms ease;
         }
-        .artist-card:hover { transform: translateY(-6px); }
-        .artist-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
-        .artist-card:hover img { transform: scale(1.06); }
+        .artist-card img { width: 100%; height: 100%; object-fit: cover; }
         .artist-grad {
           position: absolute; inset: 0;
           background: linear-gradient(to top, rgba(8,5,9,0.96) 0%, rgba(8,5,9,0.4) 55%, transparent 100%);
@@ -2280,133 +2323,178 @@ Object.assign(window, { Sala, Artistas });
 
 // Eventos Privados, Contacto, Tickets pages
 function EventosPrivados({ onNav }) {
-  const [type, setType] = useState('cumple');
+  const fallback = (e) => { e.target.src = 'assets/hero.jpg'; };
   return (
     <div className="page-enter">
+
       <PageHeader
-        eyebrow="Eventos Corporativos · Eventos Privados"
-        title='Eventos<br/><em style="font-style:normal;font-weight:300;color:var(--gold)">privados</em>'
-        subtitle="La sala más imponente de la Costa Blanca, a tu disposición."
+        eyebrow="Eventos Privados"
+        title='Eventos y alquiler<br/><em style="font-style:normal;font-weight:300;color:var(--gold)">de espacios</em>'
+        subtitle="Condado se ha consolidado como una de las salas más atractivas y mejor equipadas de España, posicionándose actualmente en el TOP 94 de las mejores salas del mundo."
       />
 
-      <div style={{ padding: '0 24px 80px' }}>
+      <section className="container">
         <div className="container-wide" style={{ margin: '0 auto' }}>
 
-          {/* Two-column: image + features */}
-          <div className="ep-split">
-            <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', minHeight: 380, background: 'var(--night-3)' }}>
-              <img src='assets/sala/sala-condado-02.jpg' alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(8,5,9,0.4), rgba(8,5,9,0.7))' }}></div>
-              <div style={{ position: 'absolute', bottom: 28, left: 28, right: 28 }}>
-                <span style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 8,
-                  background: 'var(--gold-dim)', border: '1px solid var(--gold-border)',
-                  padding: '6px 12px', borderRadius: 999,
-                  fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)',
-                  marginBottom: 14,
-                }}>El espacio</span>
-                <p className="serif" style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.9, letterSpacing: -1 }}>
-                  Tu evento.<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>A tu medida.</em>
-                </p>
-              </div>
-            </div>
+          {/* Narrative + tech specs */}
+          <div className="ep-split" style={{ marginBottom: 72 }}>
             <div>
-              <span className="eyebrow">Qué incluye</span>
-              <h3 className="serif" style={{ fontSize: 30, fontWeight: 800, textTransform: 'uppercase', letterSpacing: -0.3, marginTop: 10, marginBottom: 24 }}>
-                Producción a tu nivel.
-              </h3>
-              <ul style={{ listStyle: 'none', display: 'grid', gap: 0 }}>
-                {[
-                  ['Espacio reservado', 'Zona privada o sala completa'],
-                  ['Catering personalizado', 'Coctelería · cena · finger food'],
-                  ['DJ + producción', 'Música, luces y FX a tu gusto'],
-                  ['Seguridad y staff', 'Coordinador dedicado · staff propio'],
-                  ['Decoración temática', 'Globos, vinilos, branding, attrezzo'],
-                  ['Animación', 'Performers, GoGos, sax, percusión'],
-                  ['Photo & video', 'Reportaje profesional opcional'],
-                ].map(([k, v], i) => (
-                  <li key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '14px 0', borderBottom: '1px solid var(--w08)', gap: 16, alignItems: 'baseline' }}>
-                    <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--gold)' }}>{k}</span>
-                    <span style={{ fontSize: 13.5, color: 'var(--w60)', textAlign: 'right' }}>{v}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Form */}
-          <div style={{ marginTop: 80, background: 'var(--night-2)', border: '1px solid var(--w08)', borderRadius: 'var(--radius-lg)', padding: '40px 28px' }} className="ep-form">
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
-              <span className="eyebrow">Solicitud de presupuesto</span>
-              <h3 className="serif" style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12 }}>
-                Cuéntanos tu <em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>evento</em>.
-              </h3>
-              <p style={{ fontSize: 13.5, color: 'var(--w60)', marginTop: 12, maxWidth: 540, marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6 }}>
-                Te respondemos en menos de 24h con una propuesta personalizada y disponibilidad de fechas.
+              <span className="eyebrow">Una sala totalmente polivalente</span>
+              <h2 className="serif" style={{ fontSize: 'clamp(30px, 4vw, 48px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5, marginTop: 12, marginBottom: 20 }}>
+                Un mismo espacio,<br/><em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>infinitas formas.</em>
+              </h2>
+              <p style={{ fontSize: 15, color: 'var(--w60)', lineHeight: 1.8, marginBottom: 18 }}>
+                Su espectacular proyecto arquitectónico y de interiorismo convierte el espacio en una sala totalmente polivalente, capaz de transformarse en un elegante teatro, una sala de conciertos de gran formato o un moderno espacio para congresos y eventos corporativos.
+              </p>
+              <p style={{ fontSize: 15, color: 'var(--w60)', lineHeight: 1.8 }}>
+                Sea cual sea el formato de tu evento, en Condado la infraestructura está siempre al servicio de la emoción, el espectáculo y la “magia”.
               </p>
             </div>
-            <form onSubmit={(e) => { e.preventDefault(); alert('Solicitud enviada. Te contactaremos en menos de 24h.'); }} style={{ maxWidth: 640, margin: '0 auto' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
-                <div className="field"><label>Nombre completo</label><input required placeholder="Tu nombre" /></div>
-                <div className="field"><label>Empresa (opcional)</label><input placeholder="Si aplica" /></div>
-                <div className="field"><label>Email</label><input required type="email" placeholder="tu@email.com" /></div>
-                <div className="field"><label>Teléfono</label><input required type="tel" placeholder="+34 600 00 00 00" /></div>
-                <div className="field">
-                  <label>Tipo de evento</label>
-                  <select required>
-                    <option>Cumpleaños</option>
-                    <option>Despedida de soltero/a</option>
-                    <option>Evento corporativo</option>
-                    <option>Privatización total</option>
-                    <option>Otro</option>
-                  </select>
+            <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', minHeight: 360, background: 'var(--night-3)' }}>
+              <img src="assets/sala/sala-condado-05.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+          </div>
+
+          {/* Tech specs */}
+          <div className="ep-tech">
+            <div className="ep-tech-head">
+              <span className="eyebrow">Infraestructura técnica de primer nivel</span>
+              <p style={{ fontSize: 15, color: 'var(--w60)', lineHeight: 1.8, maxWidth: 640, margin: '14px auto 0' }}>
+                Cuenta con una pantalla de proyección 4K de 100 m², la mayor instalación de LED dinámico de Europa y un potente sistema de sonido D&B que ofrece una acústica excepcional. Cada detalle técnico y humano está diseñado para crear experiencias memorables.
+              </p>
+            </div>
+            <div className="ep-specs">
+              {[
+                { num: '100 m²', label: 'Pantalla de proyección 4K' },
+                { num: '#1 Europa', label: 'Mayor instalación de LED dinámico' },
+                { num: 'D&B', label: 'Sonido con acústica excepcional' },
+              ].map((s, i) => (
+                <div key={i} className="ep-spec">
+                  <div className="serif" style={{ fontSize: 'clamp(30px, 3.4vw, 44px)', fontWeight: 800, color: 'var(--gold)', lineHeight: 0.9, letterSpacing: -0.5 }}>{s.num}</div>
+                  <div style={{ fontSize: 12, letterSpacing: 1.5, textTransform: 'uppercase', color: 'var(--w60)', marginTop: 12, lineHeight: 1.4 }}>{s.label}</div>
                 </div>
-                <div className="field"><label>Personas estimadas</label><input required type="number" min="10" placeholder="Ej: 60" /></div>
-                <div className="field"><label>Fecha preferida</label><input required type="date" /></div>
-                <div className="field"><label>Fecha alternativa</label><input type="date" /></div>
+              ))}
+            </div>
+          </div>
+
+          {/* Empresas que han confiado */}
+          <div style={{ marginTop: 88, textAlign: 'center' }}>
+            <span className="eyebrow">Empresas que han confiado en nosotros</span>
+            <div className="ep-clients">
+              {['Paco Rabanne', 'Cruz Roja', 'Orange', 'Help!', 'Hospital Marina Salud', 'BBVA', 'Cámara de Comercio de Alicante', 'Atomic Studio'].map((c, i) => (
+                <span key={i} className="ep-client serif">{c}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Un espacio único — texto + imágenes */}
+          <div style={{ marginTop: 88 }}>
+            <div className="ep-content-split">
+              {/* Texto */}
+              <div className="ep-prose">
+                <span className="eyebrow">Un espacio único para eventos únicos</span>
+                <h2 className="serif" style={{ fontSize: 'clamp(28px, 3.6vw, 44px)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: -0.4, lineHeight: 0.95, marginTop: 12, marginBottom: 24 }}>
+                  Cualquier formato,<br/>al más <em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>alto nivel.</em>
+                </h2>
+                <p>Desde reuniones privadas y exclusivas hasta congresos multitudinarios, nuestro espacio se adapta a cualquier necesidad: presentaciones de empresa, conferencias, cenas de gala, ferias, conciertos, eventos corporativos o celebraciones privadas.</p>
+                <p>Ponemos a tu disposición todos nuestros espacios, recursos técnicos y un equipo humano especializado para que cada evento sea <strong style={{ color: 'var(--gold)', fontWeight: 600 }}>único, impactante y perfectamente ejecutado</strong>.</p>
+                <p>Nuestra amplia experiencia en producción, coordinación y dirección de eventos garantiza el éxito de cualquier propuesta.</p>
               </div>
-              <div className="field"><label>Cuéntanos más</label><textarea placeholder="Concepto, presupuesto orientativo, peticiones especiales..."></textarea></div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, margin: '16px 0 24px', fontSize: 12, color: 'var(--w60)', lineHeight: 1.5 }}>
-                <input type="checkbox" required style={{ marginTop: 3, accentColor: 'var(--gold)' }} />
-                <span>He leído y acepto la <a href="#" style={{ color: 'var(--gold)', textDecoration: 'underline' }}>política de privacidad</a>.</span>
+
+              {/* Grid de imágenes */}
+              <div className="ep-img-grid">
+                <div className="ep-img-main">
+                  <img src="assets/sala/sala-condado-02.jpg" alt="Sala Condado Club" onError={fallback} />
+                </div>
+                <div className="ep-img-secondary">
+                  <img src="assets/sala/zona-vip-escenario.jpg" alt="Evento corporativo" onError={fallback} />
+                  <img src="assets/sala/sala-condado-07.jpg" alt="Teatro Condado" onError={fallback} />
+                </div>
               </div>
-              <button type="submit" className="btn btn-gold" style={{ width: '100%', padding: '16px 26px' }}>
-                Enviar solicitud →
-              </button>
-            </form>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="ep-cta">
+            <h2 className="serif" style={{ fontSize: 'clamp(28px, 3.6vw, 46px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, letterSpacing: -0.5 }}>
+              ¿Organizas un <em style={{ fontStyle: 'normal', fontWeight: 300, color: 'var(--gold)' }}>evento</em>?
+            </h2>
+            <p style={{ fontSize: 14.5, color: 'var(--w60)', lineHeight: 1.6, maxWidth: 540, margin: '16px auto 28px' }}>
+              Cuéntanos tu proyecto y diseñaremos contigo una propuesta a medida en la sala más imponente de la Costa Blanca.
+            </p>
+            <a href="#/contacto" onClick={(e) => { e.preventDefault(); onNav('/contacto'); }} className="btn btn-gold" style={{ padding: '16px 32px' }}>
+              Solicita información
+            </a>
           </div>
         </div>
-      </div>
+      </section>
 
       <style>{`
-        .ep-types {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 10px;
-          margin-bottom: 50px;
-        }
-        @media (min-width: 600px) { .ep-types { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 900px) { .ep-types { grid-template-columns: repeat(4, 1fr); } }
-        .ep-type {
-          display: flex; align-items: center; gap: 14px;
-          padding: 22px 20px;
-          background: var(--night-2);
-          border: 1px solid var(--w08);
-          border-radius: var(--radius-md);
-          text-align: left;
-          transition: all 250ms ease;
-        }
-        .ep-type:hover { border-color: var(--gold-border); }
-        .ep-type.active { border-color: var(--gold); background: var(--gold-dim); }
-        .ep-type-icon { font-size: 26px; color: var(--gold); flex-shrink: 0; }
-
         .ep-split {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 28px;
+          display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center;
         }
-        @media (min-width: 900px) { .ep-split { grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; } }
-        @media (min-width: 768px) { .ep-form { padding: 56px 48px; } }
+        @media (min-width: 900px) { .ep-split { grid-template-columns: 1fr 1fr; gap: 56px; } }
+        .ep-tech {
+          padding: 64px 0; border-top: 1px solid var(--w08); border-bottom: 1px solid var(--w08);
+          margin-bottom: 72px;
+        }
+        .ep-tech-head { text-align: center; margin-bottom: 48px; }
+        .ep-specs {
+          display: grid; grid-template-columns: 1fr; gap: 12px;
+        }
+        @media (min-width: 700px) { .ep-specs { grid-template-columns: repeat(3, 1fr); } }
+        .ep-spec {
+          background: var(--night-2); border: 1px solid var(--w08);
+          border-radius: var(--radius-md); padding: 36px 24px; text-align: center;
+        }
+        .ep-content-split {
+          display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start;
+        }
+        @media (min-width: 900px) {
+          .ep-content-split { grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+        }
+        .ep-prose p {
+          font-size: 15px; color: var(--w60); line-height: 1.85;
+          margin-bottom: 20px;
+        }
+        .ep-prose p:last-child { margin-bottom: 0; }
+        .ep-img-grid {
+          display: grid; grid-template-columns: 1fr; gap: 12px;
+        }
+        @media (min-width: 560px) {
+          .ep-img-grid { grid-template-columns: 1.4fr 1fr; gap: 12px; }
+        }
+        .ep-img-main {
+          border-radius: var(--radius-lg); overflow: hidden;
+          aspect-ratio: 3/4; background: var(--night-3);
+        }
+        .ep-img-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+        .ep-img-main:hover img { transform: scale(1.04); }
+        .ep-img-secondary {
+          display: flex; flex-direction: column; gap: 12px;
+        }
+        .ep-img-secondary > div, .ep-img-secondary img {
+          border-radius: var(--radius-lg); overflow: hidden;
+          flex: 1; object-fit: cover; width: 100%; display: block;
+          transition: transform 600ms ease;
+        }
+        .ep-img-secondary img { aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius-lg); }
+        .ep-img-secondary img:hover { transform: scale(1.03); }
+        .ep-clients {
+          display: flex; flex-wrap: wrap; justify-content: center;
+          gap: 14px 36px; margin: 28px auto 0; max-width: 900px;
+        }
+        .ep-client {
+          font-size: clamp(18px, 2.2vw, 26px); font-weight: 700;
+          text-transform: uppercase; letter-spacing: 0.5px; color: var(--w40);
+          transition: color 200ms ease;
+        }
+        .ep-client:hover { color: var(--gold); }
+        .ep-cta {
+          margin-top: 88px; text-align: center;
+          background: var(--night-2); border: 1px solid var(--w08);
+          border-radius: var(--radius-lg); padding: 64px 28px;
+        }
       `}</style>
     </div>
   );
@@ -2554,26 +2642,7 @@ function Contacto({ onNav }) {
   );
 }
 
-function Tickets({ onNav }) {
-  return (
-    <div className="page-enter">
-      <PageHeader
-        eyebrow="Compra de entradas"
-        title='Comprar<br/><em style="font-style:normal;font-weight:300;color:var(--gold)">tickets</em>'
-        subtitle="Selecciona un evento y reserva tu acceso. Plazas limitadas, recomendamos comprar con antelación."
-      />
-      <div style={{ padding: '0 24px 100px' }}>
-        <div className="container-wide" style={{ margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
-            {EVENTS.map((ev) => <EventCard key={ev.id} event={ev} onNav={onNav} width="100%" />)}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-Object.assign(window, { EventosPrivados, Contacto, Tickets });
+Object.assign(window, { EventosPrivados, Contacto });
 
 
 // === app.jsx ===
@@ -2653,7 +2722,6 @@ const ROUTES = {
   '/artistas': Artistas,
   '/eventos-privados': EventosPrivados,
   '/contacto': Contacto,
-  '/tickets': Tickets,
 };
 
 function App() {
